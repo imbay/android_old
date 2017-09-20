@@ -1,0 +1,23 @@
+{
+    "name": "imbay",
+    "version": "1.0.0",
+    "description": "imbay - social network",
+    "scripts": {},
+    "author": "Nurasyl Aldan <nurassyl.aldan@gmail.com>",
+    "dependencies": {
+        "browser-sync": "^2.18.13",
+        "cordova-browser": "^4.1.0",
+        "cordova-plugin-whitelist": "^1.3.2",
+        "gulp": "^3.9.1",
+        "gulp-coffee": "^2.3.4",
+        "gulp-pug": "^3.3.0",
+        "gulp-rename": "^1.2.2",
+        "gulp-sass": "^3.1.0",
+        "gulp-watch": "^4.3.11"
+    },
+    "cordova": {
+        "platforms": [
+            "browser"
+        ]
+    }
+}
