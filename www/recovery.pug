@@ -1,0 +1,17 @@
+div(ng-controller='RecoveryController')
+    md-toolbar.md-accent
+        div.md-toolbar-tools
+            md-button(href='/#!/login' aria-label='Settings').md-icon-button
+                i.fa.fa-chevron-left
+            span Recovery
+    .container
+        div(layout='column' layout-padding ng-cloak)
+            .form
+                form(autocomplete='off' name='RecoveryForm')
+                    md-input-container.md-block
+                        input(ng-model='form.email' name='email' type='text' placeholder='E-mail')
+                    div(layout='row' layout-align='center center')
+                        md-button.md-raised.md-primary(flex ng-click='submit()') Get
+            .links
+                md-button(href='/#!/login') Log in
+                md-button(href='/#!/join') Registration

@@ -1,2 +1,23 @@
 
-<div>Hello!</div>
+<div ng-controller="LoginController">
+  <div class="container" layout="column" layout-padding="layout-padding" ng-cloak="ng-cloak">
+    <div class="logo"><img src="img/white_logo.png" alt=""/></div>
+    <div class="form">
+      <form autocomplete="off" name="LoginForm">
+        <md-input-container class="md-block">
+          <input ng-model="form.username" name="username" type="text" placeholder="Username or email"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <input ng-model="form.password" name="password" type="password" placeholder="Password"/>
+        </md-input-container>
+        <div layout="row" layout-align="center center">
+          <md-button class="md-raised md-primary" flex="flex" ng-click="submit()">Log in</md-button>
+        </div>
+      </form>
+    </div>
+    <div class="links">
+      <md-button href="/#!/recovery">Recovery</md-button>
+      <md-button href="/#!/join">Registration</md-button>
+    </div>
+  </div>
+</div>

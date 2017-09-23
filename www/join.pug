@@ -1,0 +1,29 @@
+div(ng-controller='JoinController')
+    md-toolbar.md-accent
+        div.md-toolbar-tools
+            md-button(href='/#!/login' aria-label='Settings').md-icon-button
+                i.fa.fa-chevron-left
+            span Registration
+    .container
+        div(layout='column' layout-padding ng-cloak)
+            .form
+                form(autocomplete='off' name='JoinForm')
+                    md-input-container.md-block
+                        input(ng-model='form.first_name' name='first_name' type='text' placeholder='First name')
+                    md-input-container.md-block
+                        input(ng-model='form.last_name' name='last_name' type='text' placeholder='Last name')
+                    md-input-container.md-block
+                        md-radio-group(ng-model='form.gender')
+                            md-radio-button(value='1').md-primary Male
+                            md-radio-button(value='0').md-primary Female
+                    md-input-container.md-block
+                        input(ng-model='form.email' name='email' type='text' placeholder='E-mail')
+                    md-input-container.md-block
+                        input(ng-model='form.username' name='username' type='text' placeholder='Username')
+                    md-input-container.md-block
+                        input(ng-model='form.password' name='password' type='text' placeholder='Password')
+                    div(layout='row' layout-align='center center')
+                        md-button.md-raised.md-primary(flex ng-click='submit()') Join
+            .links
+                md-button(href='/#!/login') Log in
+                md-button(href='/#!/recovery') Recovery

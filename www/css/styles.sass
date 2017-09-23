@@ -1,0 +1,116 @@
+$color: rgb(33,150,243)
+$color1: #227fb7
+
+// Animation.
+.fade.ng-enter
+    transition: 0.5s linear all
+    opacity: 0
+.fade.ng-enter.ng-enter-active
+    opacity: 1
+
+
+
+
+
+
+
+// Styles.
+.md-button.md-default-theme.md-primary, .md-button.md-primary
+    color: $color
+
+.md-button
+    text-transform: capitalize
+
+body
+    -webkit-touch-callout: none
+    -webkit-user-select: none
+    -khtml-user-select: none
+    user-select: none
+
+form
+    a.md-button
+        display: block
+    md-input-container
+        padding: 5px
+        margin: 0
+        label,
+        input,
+        md-radio-button
+            color: gray !important
+        &.md-input-focused input,
+        &.md-input-has-value input
+            border-color: $color !important
+            color: $color !important
+    button
+        background-color: $color1 !important
+        box-shadow: none !important
+    md-radio-group.md-default-theme:not([disabled]) .md-primary .md-on, md-radio-group:not([disabled]) .md-primary .md-on, md-radio-group.md-default-theme:not([disabled]).md-primary .md-on, md-radio-group:not([disabled]).md-primary .md-on, md-radio-button.md-default-theme:not([disabled]) .md-primary .md-on, md-radio-button:not([disabled]) .md-primary .md-on, md-radio-button.md-default-theme:not([disabled]).md-primary .md-on, md-radio-button:not([disabled]).md-primary .md-on
+        background-color: $color !important
+    md-radio-group.md-default-theme:not([disabled]) .md-primary .md-checked .md-off, md-radio-group:not([disabled]) .md-primary .md-checked .md-off, md-radio-group.md-default-theme:not([disabled]) .md-primary.md-checked .md-off, md-radio-group:not([disabled]) .md-primary.md-checked .md-off, md-radio-group.md-default-theme:not([disabled]).md-primary .md-checked .md-off, md-radio-group:not([disabled]).md-primary .md-checked .md-off, md-radio-group.md-default-theme:not([disabled]).md-primary.md-checked .md-off, md-radio-group:not([disabled]).md-primary.md-checked .md-off, md-radio-button.md-default-theme:not([disabled]) .md-primary .md-checked .md-off, md-radio-button:not([disabled]) .md-primary .md-checked .md-off, md-radio-button.md-default-theme:not([disabled]) .md-primary.md-checked .md-off, md-radio-button:not([disabled]) .md-primary.md-checked .md-off, md-radio-button.md-default-theme:not([disabled]).md-primary .md-checked .md-off, md-radio-button:not([disabled]).md-primary .md-checked .md-off, md-radio-button.md-default-theme:not([disabled]).md-primary.md-checked .md-off, md-radio-button:not([disabled]).md-primary.md-checked .md-off
+        border-color: $color !important
+
+html,
+body,
+.ng-view
+    height: 100%
+
+div.container
+    max-width: 400px
+    margin: 0 auto
+
+md-toolbar.md-accent
+    background-color: $color !important
+    div.md-toolbar-tools
+        i.fa
+            font-size: 20px
+            margin-top: 3px
+
+div[ng-controller='JoinController'],
+div[ng-controller='RecoveryController']
+    div.form
+        margin-top: 20px
+
+div[ng-controller='LoginController']
+    background-color: $color
+    height: 100%
+
+div[ng-controller='LoginController']
+    margin: 0 auto
+    div.logo
+        text-align: center
+        margin-top: 20px
+        img
+            max-width: 150px
+            opacity: 0.9
+    div.form,
+    div.links
+        margin: 0
+        padding: 10px
+    div.form
+        margin-top: 25px
+        md-input-container
+            padding: 5px
+            margin: 0
+            label
+                color: rgba(255,255,255,0.8) !important
+            &.md-input-focused input,
+            &.md-input-has-value input
+                border-color: white !important
+                color: white !important
+            input
+                border-color: rgba(255,255,255,0.5) !important
+        div button
+            background-color: $color1 !important
+            box-shadow: none !important
+div[ng-controller='LoginController'],
+div[ng-controller='JoinController'],
+div[ng-controller='RecoveryController']
+    div.links a[href]
+        display: block
+        color: rgba(255,255,255,0.7) !important
+        &:hover
+            background-color: transparent !important
+    &[ng-controller='JoinController'],
+    &[ng-controller='RecoveryController']
+        div.links a[href]
+            color: $color !important

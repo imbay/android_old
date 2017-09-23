@@ -1,1 +1,15 @@
-div Hello!
+div(ng-controller='LoginController')
+    div(layout='column' layout-padding ng-cloak).container
+        .logo
+            img(src='img/white_logo.png' alt='')
+        .form
+            form(autocomplete='off' name='LoginForm')
+                md-input-container.md-block
+                    input(ng-model='form.username' name='username' type='text' placeholder='Username or email')
+                md-input-container.md-block
+                    input(ng-model='form.password' name='password' type='password' placeholder='Password')
+                div(layout='row' layout-align='center center')
+                    md-button.md-raised.md-primary(flex ng-click='submit()') Log in
+        .links
+            md-button(href='/#!/recovery') Recovery
+            md-button(href='/#!/join') Registration

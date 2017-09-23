@@ -23,6 +23,11 @@ rm -f www/js/lib/angular-animate.js &&\
 wget https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate.min.js &&\
 mv angular-animate.min.js www/js/lib/angular-animate.js &&\
 
+rm -f angular-animate.min.js &&\
+rm -f www/js/lib/angular-animate.js &&\
+wget https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate.min.js &&\
+mv angular-animate.min.js www/js/lib/angular-animate.js &&\
+
 rm -f angular-aria.min.js &&\
 rm -f www/js/lib/angular-aria.js &&\
 wget https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-aria.min.js &&\

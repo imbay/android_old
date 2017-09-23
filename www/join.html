@@ -1,0 +1,44 @@
+
+<div ng-controller="JoinController">
+  <md-toolbar class="md-accent">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" href="/#!/login" aria-label="Settings"><i class="fa fa-chevron-left"></i></md-button><span>Registration</span>
+    </div>
+  </md-toolbar>
+  <div class="container">
+    <div layout="column" layout-padding="layout-padding" ng-cloak="ng-cloak">
+      <div class="form">
+        <form autocomplete="off" name="JoinForm">
+          <md-input-container class="md-block">
+            <input ng-model="form.first_name" name="first_name" type="text" placeholder="First name"/>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <input ng-model="form.last_name" name="last_name" type="text" placeholder="Last name"/>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <md-radio-group ng-model="form.gender">
+              <md-radio-button class="md-primary" value="1">Male</md-radio-button>
+              <md-radio-button class="md-primary" value="0">Female</md-radio-button>
+            </md-radio-group>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <input ng-model="form.email" name="email" type="text" placeholder="E-mail"/>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <input ng-model="form.username" name="username" type="text" placeholder="Username"/>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <input ng-model="form.password" name="password" type="text" placeholder="Password"/>
+          </md-input-container>
+          <div layout="row" layout-align="center center">
+            <md-button class="md-raised md-primary" flex="flex" ng-click="submit()">Join</md-button>
+          </div>
+        </form>
+      </div>
+      <div class="links">
+        <md-button href="/#!/login">Log in</md-button>
+        <md-button href="/#!/recovery">Recovery</md-button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+
+<div ng-controller="RecoveryController">
+  <md-toolbar class="md-accent">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" href="/#!/login" aria-label="Settings"><i class="fa fa-chevron-left"></i></md-button><span>Recovery</span>
+    </div>
+  </md-toolbar>
+  <div class="container">
+    <div layout="column" layout-padding="layout-padding" ng-cloak="ng-cloak">
+      <div class="form">
+        <form autocomplete="off" name="RecoveryForm">
+          <md-input-container class="md-block">
+            <input ng-model="form.email" name="email" type="text" placeholder="E-mail"/>
+          </md-input-container>
+          <div layout="row" layout-align="center center">
+            <md-button class="md-raised md-primary" flex="flex" ng-click="submit()">Get</md-button>
+          </div>
+        </form>
+      </div>
+      <div class="links">
+        <md-button href="/#!/login">Log in</md-button>
+        <md-button href="/#!/join">Registration</md-button>
+      </div>
+    </div>
+  </div>
+</div>
