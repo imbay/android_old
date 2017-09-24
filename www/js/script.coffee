@@ -13,7 +13,12 @@ app.config ($routeProvider)->
     .when '/recovery', {
         templateUrl: '/recovery.html',
     }
-app.controller 'MainController', ($scope)->
+    .when '/home', {
+        templateUrl: '/home.html',
+    }
+app.controller 'MainController', ($scope, $timeout, $mdSidenav)->
+    $scope.leftMenu = ->
+        $mdSidenav('leftMenu').toggle()
 app.controller 'LoginController', ($scope, $mdDialog)->
     $scope.form = {
         username: '',
@@ -34,6 +39,12 @@ app.controller 'JoinController', ($scope, $mdDialog)->
     }
     $scope.submit = ->
 app.controller 'RecoveryController', ($scope, $mdDialog)->
+    $scope.form = {
+        username: '',
+        password: ''
+    }
+    $scope.submit = ->
+app.controller 'HomeController', ($scope, $mdDialog)->
     $scope.form = {
         username: '',
         password: ''

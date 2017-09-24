@@ -1,0 +1,36 @@
+div(ng-controller='HomeController' layout='column' ng-cloak)
+    section(layout='row' flex)
+        md-sidenav.md-sidenav-left(md-component-id='leftMenu' md-whiteframe-4dp)
+            .user
+                .photo
+                    img(src='img/no_photo.png' alt='')
+                .username @nurasyl
+                .name Nurasyl Aldan
+            md-list
+                md-list-item
+                    md-button(href='' layout='row' flex layout-align='start')
+                        div
+                            i.fa.fa-home
+                        div Home
+                md-list-item
+                    md-button(href='' layout='row' flex layout-align='start')
+                        div
+                            i.fa.fa-cog
+                        div Settings
+                md-list-item
+                    md-button(href='' layout='row' flex layout-align='start')
+                        div
+                            i.fa.fa-sign-out
+                        div Exit
+                md-list-item
+                    md-button(href='' layout='row' flex layout-align='start')
+                        div
+                            i.fa.fa-question-circle
+                        div About
+        md-content(flex)
+            md-toolbar.md-accent
+                div.md-toolbar-tools
+                    md-button(aria-label='Menu' ng-click='leftMenu()').md-icon-button
+                        i.fa.fa-bars
+                    span Home
+            div(layout='column')

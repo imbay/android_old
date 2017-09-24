@@ -1,0 +1,40 @@
+
+<div ng-controller="AccountController" layout="column" ng-cloak="ng-cloak">
+  <section layout="row" flex="flex">
+    <md-sidenav class="md-sidenav-left" md-component-id="leftMenu" md-whiteframe-4dp="md-whiteframe-4dp">
+      <div class="user">
+        <div class="photo"><img src="img/no_photo.png" alt=""/></div>
+        <div class="username">@nurasyl</div>
+        <div class="name">Nurasyl Aldan</div>
+      </div>
+      <md-list>
+        <md-list-item>
+          <md-button href="" layout="row" flex="flex" layout-align="start">
+            <div><i class="fa fa-home"></i></div>
+            <div>Home</div>
+          </md-button>
+        </md-list-item>
+        <md-list-item>
+          <md-button href="" layout="row" flex="flex" layout-align="start">
+            <div><i class="fa fa-cog"></i></div>
+            <div>Settings</div>
+          </md-button>
+        </md-list-item>
+        <md-list-item>
+          <md-button href="" layout="row" flex="flex" layout-align="start">
+            <div><i class="fa fa-sign-out"></i></div>
+            <div>Exit</div>
+          </md-button>
+        </md-list-item>
+      </md-list>
+    </md-sidenav>
+    <md-content flex="flex">
+      <md-toolbar class="md-accent">
+        <div class="md-toolbar-tools">
+          <md-button class="md-icon-button" aria-label="Menu" ng-click="leftMenu()"><i class="fa fa-bars"></i></md-button><span>Account</span>
+        </div>
+      </md-toolbar>
+      <div layout="column"></div>
+    </md-content>
+  </section>
+</div>

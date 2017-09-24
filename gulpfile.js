@@ -16,7 +16,7 @@ ext = {
 	css: '.css'
 },
 liveReload = {
-	on: true, // turn on.
+	on: true, // turn on?
 	host: '127.0.0.1',
 	port: 2001,
 	baseDir: './www',
