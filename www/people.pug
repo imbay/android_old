@@ -1,0 +1,16 @@
+div(ng-controller='PeopleController' layout='column' ng-cloak)
+    include ./menu.pug
+    md-content
+        include ./header.pug
+        div(layout='column')
+            .logo
+                img(src='img/main_logo.png' alt='')
+                .buttons(layout='column')
+                    md-button(md-colors='{backgroundColor: "blue"}' href='/#!/gentlemen')
+                        i.fa.fa-mars
+                        span Gentlemen
+                        i.fa.fa-arrow-right
+                    md-button(md-colors='{backgroundColor: "pink"}' href='/#!/lady')
+                        i.fa.fa-venus
+                        span Lady
+                        i.fa.fa-arrow-right

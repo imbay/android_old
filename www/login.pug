@@ -10,6 +10,6 @@ div(ng-controller='LoginController' md-colors='{backgroundColor: "blue"}')
                     input(ng-model='form.password' name='password' type='password' placeholder='Password')
                 div(layout='row' layout-align='center center')
                     md-button.md-raised.md-primary(flex ng-click='submit()') Log in
-        .links
+        .links(layout='column')
             md-button(href='/#!/recovery') Recovery
             md-button(href='/#!/join') Registration

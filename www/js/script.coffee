@@ -2,8 +2,6 @@ app = angular.module 'imbay', ['ngMaterial', 'ngRoute', 'ngMessages', 'ngAnimate
 app.config ($mdThemingProvider)->
     $mdThemingProvider.theme('default')
         .primaryPalette('blue')
-        .accentPalette('blue')
-        .warnPalette('red')
         .backgroundPalette('grey');
 
 app.config ($routeProvider)->
@@ -20,8 +18,8 @@ app.config ($routeProvider)->
     .when '/recovery', {
         templateUrl: '/recovery.html',
     }
-    .when '/home', {
-        templateUrl: '/home.html',
+    .when '/people', {
+        templateUrl: '/people.html',
     }
     .when '/settings', {
         templateUrl: '/settings.html',
@@ -29,7 +27,17 @@ app.config ($routeProvider)->
     .when '/about', {
         templateUrl: '/about.html',
     }
+    .when '/gentlemen', {
+        templateUrl: '/gentlemen.html',
+    }
+    .when '/lady', {
+        templateUrl: '/lady.html',
+    }
+    .when '/my_photos', {
+        templateUrl: '/my_photos.html',
+    }
 app.controller 'MainController', ($scope, $timeout, $mdSidenav)->
+    $scope.bgColor = 'blue'
     $scope.leftMenu = ->
         $mdSidenav('leftMenu').toggle()
 app.controller 'LoginController', ($scope, $mdDialog)->
@@ -46,9 +54,16 @@ app.controller 'JoinController', ($scope, $mdDialog)->
 app.controller 'RecoveryController', ($scope, $mdDialog)->
     $scope.submit = ->
 
-app.controller 'HomeController', ($scope, $mdDialog)->
-    $scope.name = 'Home'
+app.controller 'PeopleController', ($scope, $mdDialog)->
+    $scope.title = 'People'
+app.controller 'MyPhotosController', ($scope, $mdDialog)->
+    $scope.title = 'My photos'
 app.controller 'SettingsController', ($scope, $mdDialog)->
-    $scope.name = 'Settings'
+    $scope.title = 'Settings'
 app.controller 'AboutController', ($scope, $mdDialog)->
-    $scope.name = 'About'
+    $scope.title = 'About'
+app.controller 'GentlemenController', ($scope, $mdDialog)->
+    $scope.title = 'About'
+app.controller 'LadyController', ($scope, $mdDialog)->
+    $scope.title = 'About'
+    $scope.bgColor = 'pink'

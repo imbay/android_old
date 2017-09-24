@@ -1,16 +1,21 @@
 section(layout='row' flex)
     md-sidenav.md-sidenav-left(md-component-id='leftMenu' md-whiteframe-4dp)
-        .user(md-colors='{backgroundColor: "blue"}')
+        .user(md-colors='{backgroundColor: "{{bgColor}}"}')
             .photo
                 img(src='img/no_photo.png' alt='')
             .username @nurasyl
             .name Nurasyl Aldan
         md-list
             md-list-item
-                md-button(href='/#!/home' layout='row' flex layout-align='start' ng-click='leftMenu()')
+                md-button(href='/#!/people' layout='row' flex layout-align='start' ng-click='leftMenu()')
                     div
-                        i.fa.fa-home
-                    div Home
+                        i.fa.fa-users
+                    div People
+            md-list-item
+                md-button(href='/#!/my_photos' layout='row' flex layout-align='start' ng-click='leftMenu()')
+                    div
+                        i.fa.fa-picture-o
+                    div My photos
             md-list-item
                 md-button(href='/#!/settings' layout='row' flex layout-align='start' ng-click='leftMenu()')
                     div

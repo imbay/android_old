@@ -1,23 +1,17 @@
 
-<div ng-controller="AboutController" layout="column" ng-cloak="ng-cloak">
+<div ng-controller="PhotoController" layout="column" ng-cloak="ng-cloak">
   <section layout="row" flex="flex">
     <md-sidenav class="md-sidenav-left" md-component-id="leftMenu" md-whiteframe-4dp="md-whiteframe-4dp">
-      <div class="user" md-colors="{backgroundColor: &quot;{{bgColor}}&quot;}">
+      <div class="user" md-colors="{backgroundColor: &quot;blue&quot;}">
         <div class="photo"><img src="img/no_photo.png" alt=""/></div>
         <div class="username">@nurasyl</div>
         <div class="name">Nurasyl Aldan</div>
       </div>
       <md-list>
         <md-list-item>
-          <md-button href="/#!/people" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
-            <div><i class="fa fa-users"></i></div>
-            <div>People</div>
-          </md-button>
-        </md-list-item>
-        <md-list-item>
-          <md-button href="/#!/my_photos" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
-            <div><i class="fa fa-picture-o"></i></div>
-            <div>My photos</div>
+          <md-button href="/#!/home" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
+            <div><i class="fa fa-home"></i></div>
+            <div>Home</div>
           </md-button>
         </md-list-item>
         <md-list-item>
@@ -42,15 +36,13 @@
     </md-sidenav>
   </section>
   <md-content flex="flex">
-    <md-toolbar>
+    <md-toolbar class="md-accent" md-colors="{backgroundColor: &quot;pink&quot;}">
       <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="{{title}}" ng-click="leftMenu()"><i class="fa fa-bars"></i></md-button><span>{{title}}</span>
+        <md-button class="md-icon-button" aria-label="{{name}}" ng-click="leftMenu()"><i class="fa fa-bars"></i></md-button><span>Lady</span>
       </div>
     </md-toolbar>
-    <div layout="column">
-      <div class="logo"><img src="img/main_logo.png" alt=""/></div>
-      <h4>imbay - social network</h4>
-      <p>imbay &copy; 2017</p>
+    <div class="container">
+      <div layout="column" layout-padding="layout-padding" ng-cloak="ng-cloak"></div>
     </div>
   </md-content>
 </div>

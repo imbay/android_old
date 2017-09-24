@@ -9,9 +9,15 @@
       </div>
       <md-list>
         <md-list-item>
-          <md-button href="/#!/home" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
-            <div><i class="fa fa-home"></i></div>
-            <div>Home</div>
+          <md-button href="/#!/people" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
+            <div><i class="fa fa-users"></i></div>
+            <div>People</div>
+          </md-button>
+        </md-list-item>
+        <md-list-item>
+          <md-button href="/#!/my_photos" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
+            <div><i class="fa fa-picture-o"></i></div>
+            <div>My photos</div>
           </md-button>
         </md-list-item>
         <md-list-item>
@@ -44,8 +50,8 @@
     <div layout="column">
       <div class="logo"><img src="img/main_logo.png" alt=""/></div>
       <div class="buttons" layout="column">
-        <md-button md-colors="{backgroundColor: &quot;blue&quot;}" href=""><i class="fa fa-mars"></i><span>Gentlemen</span><i class="fa fa-arrow-right"></i></md-button>
-        <md-button md-colors="{backgroundColor: &quot;pink&quot;}" href=""><i class="fa fa-venus"></i><span>Lady</span><i class="fa fa-arrow-right"></i></md-button>
+        <md-button md-colors="{backgroundColor: &quot;blue&quot;}" href="/#!/gentlemen"><i class="fa fa-mars"></i><span>Gentlemen</span><i class="fa fa-arrow-right"></i></md-button>
+        <md-button md-colors="{backgroundColor: &quot;pink&quot;}" href="/#!/lady"><i class="fa fa-venus"></i><span>Lady</span><i class="fa fa-arrow-right"></i></md-button>
       </div>
     </div>
   </md-content>
