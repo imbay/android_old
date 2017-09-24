@@ -1,0 +1,103 @@
+
+<div ng-controller="SettingsController" layout="column" ng-cloak="ng-cloak">
+  <section layout="row" flex="flex">
+    <md-sidenav class="md-sidenav-left" md-component-id="leftMenu" md-whiteframe-4dp="md-whiteframe-4dp">
+      <div class="user" md-colors="{backgroundColor: &quot;blue&quot;}">
+        <div class="photo"><img src="img/no_photo.png" alt=""/></div>
+        <div class="username">@nurasyl</div>
+        <div class="name">Nurasyl Aldan</div>
+      </div>
+      <md-list>
+        <md-list-item>
+          <md-button href="/#!/home" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
+            <div><i class="fa fa-home"></i></div>
+            <div>Home</div>
+          </md-button>
+        </md-list-item>
+        <md-list-item>
+          <md-button href="/#!/settings" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
+            <div><i class="fa fa-cog"></i></div>
+            <div>Settings</div>
+          </md-button>
+        </md-list-item>
+        <md-list-item>
+          <md-button layout="row" flex="flex" layout-align="start">
+            <div><i class="fa fa-sign-out"></i></div>
+            <div>Exit</div>
+          </md-button>
+        </md-list-item>
+        <md-list-item>
+          <md-button href="/#!/about" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
+            <div><i class="fa fa-question-circle"></i></div>
+            <div>About</div>
+          </md-button>
+        </md-list-item>
+      </md-list>
+    </md-sidenav>
+  </section>
+  <md-content flex="flex">
+    <md-toolbar class="md-accent">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="{{name}}" ng-click="leftMenu()"><i class="fa fa-bars"></i></md-button><span>{{name}}</span>
+      </div>
+    </md-toolbar>
+    <div class="container">
+      <div layout="column" layout-padding="layout-padding" ng-cloak="ng-cloak">
+        <div class="form">
+          <form autocomplete="off">
+            <md-input-container class="md-block">
+              <input ng-model="form.first_name" type="text" placeholder="First name"/>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <input ng-model="form.last_name" type="text" placeholder="Last name"/>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <md-radio-group ng-model="form.gender">
+                <md-radio-button class="md-primary" value="1">Male</md-radio-button>
+                <md-radio-button class="md-primary" value="0">Female</md-radio-button>
+              </md-radio-group>
+            </md-input-container>
+            <div layout="row" layout-align="center center">
+              <md-button class="md-raised md-primary" flex="flex" ng-click="submit()">Update</md-button>
+            </div>
+          </form>
+        </div>
+        <div class="form">
+          <form autocomplete="off">
+            <md-input-container class="md-block">
+              <input ng-model="form.username" type="text" placeholder="Username"/>
+            </md-input-container>
+            <div layout="row" layout-align="center center">
+              <md-button class="md-raised md-primary" flex="flex" ng-click="submit()">Update</md-button>
+            </div>
+          </form>
+        </div>
+        <div class="form">
+          <form autocomplete="off">
+            <md-input-container class="md-block">
+              <input ng-model="form.password" type="text" placeholder="Password"/>
+            </md-input-container>
+            <div layout="row" layout-align="center center">
+              <md-button class="md-raised md-primary" flex="flex" ng-click="submit()">Update</md-button>
+            </div>
+          </form>
+        </div>
+        <div class="form">
+          <form autocomplete="off">
+            <md-input-container class="md-block" flex-gt-sm="flex-gt-sm">
+              <label>Language</label>
+              <md-select ng-model="form.language">
+                <md-option value="kk">Қазақша</md-option>
+                <md-option value="ru">Русский</md-option>
+                <md-option value="en">English</md-option>
+              </md-select>
+            </md-input-container>
+            <div layout="row" layout-align="center center">
+              <md-button class="md-raised md-primary" flex="flex" ng-click="submit()">Update</md-button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </md-content>
+</div>

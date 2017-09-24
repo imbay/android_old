@@ -1,4 +1,11 @@
 app = angular.module 'imbay', ['ngMaterial', 'ngRoute', 'ngMessages', 'ngAnimate']
+app.config ($mdThemingProvider)->
+    $mdThemingProvider.theme('default')
+        .primaryPalette('blue')
+        .accentPalette('blue')
+        .warnPalette('red')
+        .backgroundPalette('grey');
+
 app.config ($routeProvider)->
     $routeProvider
     .when '/', {
@@ -16,14 +23,16 @@ app.config ($routeProvider)->
     .when '/home', {
         templateUrl: '/home.html',
     }
+    .when '/settings', {
+        templateUrl: '/settings.html',
+    }
+    .when '/about', {
+        templateUrl: '/about.html',
+    }
 app.controller 'MainController', ($scope, $timeout, $mdSidenav)->
     $scope.leftMenu = ->
         $mdSidenav('leftMenu').toggle()
 app.controller 'LoginController', ($scope, $mdDialog)->
-    $scope.form = {
-        username: '',
-        password: ''
-    }
     $scope.submit = ->
         $mdDialog.show(
             $mdDialog.alert()
@@ -33,20 +42,13 @@ app.controller 'LoginController', ($scope, $mdDialog)->
             .ok('OK')
         )
 app.controller 'JoinController', ($scope, $mdDialog)->
-    $scope.form = {
-        username: '',
-        password: ''
-    }
     $scope.submit = ->
 app.controller 'RecoveryController', ($scope, $mdDialog)->
-    $scope.form = {
-        username: '',
-        password: ''
-    }
     $scope.submit = ->
+
 app.controller 'HomeController', ($scope, $mdDialog)->
-    $scope.form = {
-        username: '',
-        password: ''
-    }
-    $scope.submit = ->
+    $scope.name = 'Home'
+app.controller 'SettingsController', ($scope, $mdDialog)->
+    $scope.name = 'Settings'
+app.controller 'AboutController', ($scope, $mdDialog)->
+    $scope.name = 'About'

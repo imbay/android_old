@@ -1,5 +1,4 @@
-$color: rgb(33,150,243)
-$color1: #227fb7
+$color: #227fb7
 
 // Animation.
 .fade.ng-enter
@@ -8,16 +7,7 @@ $color1: #227fb7
 .fade.ng-enter.ng-enter-active
     opacity: 1
 
-
-
-
-
-
-
 // Styles.
-.md-button.md-default-theme.md-primary, .md-button.md-primary
-    color: $color
-
 .md-button
     text-transform: capitalize
 
@@ -26,28 +16,6 @@ body
     -webkit-user-select: none
     -khtml-user-select: none
     user-select: none
-
-form
-    a.md-button
-        display: block
-    md-input-container
-        padding: 5px
-        margin: 0
-        label,
-        input,
-        md-radio-button
-            color: gray !important
-        &.md-input-focused input,
-        &.md-input-has-value input
-            border-color: $color !important
-            color: $color !important
-    button
-        background-color: $color1 !important
-        box-shadow: none !important
-    md-radio-group.md-default-theme:not([disabled]) .md-primary .md-on, md-radio-group:not([disabled]) .md-primary .md-on, md-radio-group.md-default-theme:not([disabled]).md-primary .md-on, md-radio-group:not([disabled]).md-primary .md-on, md-radio-button.md-default-theme:not([disabled]) .md-primary .md-on, md-radio-button:not([disabled]) .md-primary .md-on, md-radio-button.md-default-theme:not([disabled]).md-primary .md-on, md-radio-button:not([disabled]).md-primary .md-on
-        background-color: $color !important
-    md-radio-group.md-default-theme:not([disabled]) .md-primary .md-checked .md-off, md-radio-group:not([disabled]) .md-primary .md-checked .md-off, md-radio-group.md-default-theme:not([disabled]) .md-primary.md-checked .md-off, md-radio-group:not([disabled]) .md-primary.md-checked .md-off, md-radio-group.md-default-theme:not([disabled]).md-primary .md-checked .md-off, md-radio-group:not([disabled]).md-primary .md-checked .md-off, md-radio-group.md-default-theme:not([disabled]).md-primary.md-checked .md-off, md-radio-group:not([disabled]).md-primary.md-checked .md-off, md-radio-button.md-default-theme:not([disabled]) .md-primary .md-checked .md-off, md-radio-button:not([disabled]) .md-primary .md-checked .md-off, md-radio-button.md-default-theme:not([disabled]) .md-primary.md-checked .md-off, md-radio-button:not([disabled]) .md-primary.md-checked .md-off, md-radio-button.md-default-theme:not([disabled]).md-primary .md-checked .md-off, md-radio-button:not([disabled]).md-primary .md-checked .md-off, md-radio-button.md-default-theme:not([disabled]).md-primary.md-checked .md-off, md-radio-button:not([disabled]).md-primary.md-checked .md-off
-        border-color: $color !important
 
 html,
 body,
@@ -59,11 +27,13 @@ div.container
     margin: 0 auto
 
 md-toolbar.md-accent
-    background-color: $color !important
     div.md-toolbar-tools
         i.fa
             font-size: 20px
             margin-top: 3px
+
+md-input-container
+    margin: 0
 
 div[ng-controller='JoinController'],
 div[ng-controller='RecoveryController']
@@ -71,11 +41,7 @@ div[ng-controller='RecoveryController']
         margin-top: 20px
 
 div[ng-controller='LoginController']
-    background-color: $color
     height: 100%
-
-div[ng-controller='LoginController']
-    margin: 0 auto
     div.logo
         text-align: center
         margin-top: 20px
@@ -100,7 +66,7 @@ div[ng-controller='LoginController']
             input
                 border-color: rgba(255,255,255,0.5) !important
         div button
-            background-color: $color1 !important
+            background-color: $color !important
             box-shadow: none !important
 div[ng-controller='LoginController'],
 div[ng-controller='JoinController'],
@@ -110,16 +76,11 @@ div[ng-controller='RecoveryController']
         color: rgba(255,255,255,0.7) !important
         &:hover
             background-color: transparent !important
-    &[ng-controller='JoinController'],
-    &[ng-controller='RecoveryController']
-        div.links a[href]
-            color: $color !important
 
 md-sidenav[md-component-id='leftMenu']
     div.user
         padding: 15px
         padding-top: 25px
-        background-color: $color
         color: white
         text-align: center
         div.photo
@@ -131,11 +92,67 @@ md-sidenav[md-component-id='leftMenu']
             font-size: 14px
         div.name
             margin-top: 5px
-md-list md-list-item a[href]
-    margin: 0 !important
-    padding: 5px
-    padding-left: 15px
-    color: rgba(0,0,0,0.7)
-    i.fa
-        margin-right: 10px
-        font-size: 16px
+md-list md-list-item
+    a[href],
+    button.md-button
+        margin: 0 !important
+        padding: 5px
+        padding-left: 15px
+        color: rgba(0,0,0,0.7)
+        i.fa
+            margin-right: 10px
+            margin-left: 7px
+            font-size: 16px
+
+div[ng-controller='HomeController']
+    md-content div[layout='column']
+        div.logo
+            text-align: center
+            margin-top: 80px
+            img
+                text-align: center
+                max-width: 200px
+        div.buttons
+            margin-top: 50px
+            a[href]
+                margin-left: 25px
+                margin-right: 25px
+                margin-top: 15px
+                text-transform: uppercase
+                text-align: left
+                i.fa.fa-mars,
+                i.fa.fa-venus
+                    margin-right: 25px
+                    margin-left: 25px
+                i.fa.fa-arrow-right
+                    float: right
+                    margin-top: 10px
+                    margin-right: 15px
+
+div[ng-controller='SettingsController']
+    md-content[flex]
+        background-color: rgb(245,245,245) !important
+    div.form
+        background-color: white
+        padding: 15px
+        padding-top: 25px
+        border: 1px solid #e0e0e0
+        border-radius: 3px
+        margin-bottom: 15px
+
+div[ng-controller='AboutController']
+    div[layout='column']
+        div.logo
+            margin-top: 100px
+            text-align: center
+            img
+                max-width: 180px
+        h4,
+        p
+            text-align: center
+        h4
+            color: $color
+            font-size: 16px
+        p
+            color: gray
+            margin-top: 70px

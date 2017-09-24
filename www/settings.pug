@@ -1,0 +1,40 @@
+div(ng-controller='SettingsController' layout='column' ng-cloak)
+    include ./menu.pug
+    md-content(flex)
+        include ./header.pug
+        .container
+            div(layout='column' layout-padding ng-cloak)
+                .form
+                    form(autocomplete='off')
+                        md-input-container.md-block
+                            input(ng-model='form.first_name' type='text' placeholder='First name')
+                        md-input-container.md-block
+                            input(ng-model='form.last_name' type='text' placeholder='Last name')
+                        md-input-container.md-block
+                            md-radio-group(ng-model='form.gender')
+                                md-radio-button(value='1').md-primary Male
+                                md-radio-button(value='0').md-primary Female
+                        div(layout='row' layout-align='center center')
+                            md-button.md-raised.md-primary(flex ng-click='submit()') Update
+                .form
+                    form(autocomplete='off')
+                        md-input-container.md-block
+                            input(ng-model='form.username' type='text' placeholder='Username')
+                        div(layout='row' layout-align='center center')
+                            md-button.md-raised.md-primary(flex ng-click='submit()') Update
+                .form
+                    form(autocomplete='off')
+                        md-input-container.md-block
+                            input(ng-model='form.password' type='text' placeholder='Password')
+                        div(layout='row' layout-align='center center')
+                            md-button.md-raised.md-primary(flex ng-click='submit()') Update
+                .form
+                    form(autocomplete='off')
+                        md-input-container.md-block(flex-gt-sm)
+                            label Language
+                            md-select(ng-model='form.language')
+                                md-option(value='kk') Қазақша
+                                md-option(value='ru') Русский
+                                md-option(value='en') English
+                        div(layout='row' layout-align='center center')
+                            md-button.md-raised.md-primary(flex ng-click='submit()') Update

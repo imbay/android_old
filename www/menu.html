@@ -1,0 +1,36 @@
+
+<section layout="row" flex="flex">
+  <md-sidenav class="md-sidenav-left" md-component-id="leftMenu" md-whiteframe-4dp="md-whiteframe-4dp">
+    <div class="user" md-colors="{backgroundColor: &quot;blue&quot;}">
+      <div class="photo"><img src="img/no_photo.png" alt=""/></div>
+      <div class="username">@nurasyl</div>
+      <div class="name">Nurasyl Aldan</div>
+    </div>
+    <md-list>
+      <md-list-item>
+        <md-button href="/#!/home" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
+          <div><i class="fa fa-home"></i></div>
+          <div>Home</div>
+        </md-button>
+      </md-list-item>
+      <md-list-item>
+        <md-button href="/#!/settings" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
+          <div><i class="fa fa-cog"></i></div>
+          <div>Settings</div>
+        </md-button>
+      </md-list-item>
+      <md-list-item>
+        <md-button layout="row" flex="flex" layout-align="start">
+          <div><i class="fa fa-sign-out"></i></div>
+          <div>Exit</div>
+        </md-button>
+      </md-list-item>
+      <md-list-item>
+        <md-button href="/#!/about" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
+          <div><i class="fa fa-question-circle"></i></div>
+          <div>About</div>
+        </md-button>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+</section>
