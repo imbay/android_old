@@ -4,8 +4,8 @@
     <md-sidenav class="md-sidenav-left" md-component-id="leftMenu" md-whiteframe-4dp="md-whiteframe-4dp">
       <div class="user" md-colors="{backgroundColor: &quot;{{bgColor}}&quot;}">
         <div class="photo"><img src="img/no_photo.png" alt=""/></div>
-        <div class="username">@nurasyl</div>
-        <div class="name">Nurasyl Aldan</div>
+        <div class="username">@{{current_user.username}}</div>
+        <div class="name">{{current_user.first_name}} {{current_user.last_name}}</div>
       </div>
       <md-list>
         <md-list-item>
@@ -27,7 +27,7 @@
           </md-button>
         </md-list-item>
         <md-list-item>
-          <md-button layout="row" flex="flex" layout-align="start">
+          <md-button layout="row" flex="flex" layout-align="start" ng-click="deleteSession()">
             <div><i class="fa fa-sign-out"></i></div>
             <div>Exit</div>
           </md-button>

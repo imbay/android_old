@@ -1,5 +1,6 @@
 api_url = 'http://localhost:3000/api/v1/'
 systemLanguage = navigator.language.substr(0,2)
+
 showFormErrors = (formElement, server_errors, errors_normalizer)->
     formElement.find('div.error').hide()
     for key, value of server_errors
@@ -20,7 +21,7 @@ app.config ($mdThemingProvider)->
 app.config ($routeProvider)->
     $routeProvider
     .when '/', {
-        templateUrl: '/login.html',
+        templateUrl: '/start.html',
     }
     .when '/login', {
         templateUrl: '/login.html',
@@ -50,13 +51,12 @@ app.config ($routeProvider)->
         templateUrl: '/my_photos.html',
     }
 
-$mainControllerScope = null
-app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog)->
-    $mainControllerScope = $scope
+$mainScope = null
+app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http)->
     $scope.bgColor = 'blue'
     $scope.leftMenu = ->
         $mdSidenav('leftMenu').toggle()
-    $mainControllerScope.UnknowErrorAlert = ->
+    $scope.UnknowErrorAlert = ->
         $mdDialog.show(
             $mdDialog.alert()
             .clickOutsideToClose(true)
@@ -64,6 +64,35 @@ app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog)->
             .textContent('Unknow error')
             .ok('OK')
         )
+    $scope.is_auth = false
+    $scope.getCurrentUser = (callback)->
+        $http.post(api_url+'account/current_user', { session_key: localStorage.getItem('session_key') }).then((response)->
+            response = response.data
+            callback(response.body)
+        , $scope.UnknowErrorAlert)
+    
+    $scope.deleteSession = ->
+        $http.post(api_url+'account/sign_out', { session_key: localStorage.getItem('session_key') }).then((response)->
+            response = response.data
+            if response.error == 0
+                localStorage.setItem('session_key', null)
+                location.href = '/'
+            else
+                $scope.UnknowErrorAlert()
+            return null
+        , $scope.UnknowErrorAlert)
+    
+    $scope.getCurrentUser((response)->
+        if response != null
+            # Is auth.
+            location.href = '/#!/people'
+            $scope.current_user = response
+        else
+            # Is not auth.
+            location.href = '/#!/login'
+    )
+    
+    $mainScope = $scope
 
 app.controller 'LoginController', ($scope, $mdDialog, $http)->
     $scope.form = {
@@ -73,7 +102,6 @@ app.controller 'LoginController', ($scope, $mdDialog, $http)->
     $scope.submit = ->
         $http.post(api_url+'account/sign_in', $scope.form).then((response)->
             response = response.data
-            console.log response
             if response.error == 2
                 $mdDialog.show(
                     $mdDialog.alert()
@@ -83,10 +111,11 @@ app.controller 'LoginController', ($scope, $mdDialog, $http)->
                     .ok('OK')
                 )
             else if response.error == 0
-                alert 'good'
+                localStorage.setItem('session_key', response.body)
+                location.href = '/'
             else
-                $mainControllerScope.UnknowErrorAlert
-        , $mainControllerScope.UnknowErrorAlert)
+                $mainScope.UnknowErrorAlert
+        , $mainScope.UnknowErrorAlert)
 app.controller 'JoinController', ($scope, $mdDialog, $http)->
     $scope.form = {
         first_name: '',
@@ -107,10 +136,9 @@ app.controller 'JoinController', ($scope, $mdDialog, $http)->
                     }
                 })
             else
-                alert 'good'
-        , $mainControllerScope.UnknowErrorAlert)
+                location.href = '/#!/people'
+        , $mainScope.UnknowErrorAlert)
 app.controller 'RecoveryController', ($scope, $mdDialog)->
-    $scope.submit = ->
 
 app.controller 'PeopleController', ($scope, $mdDialog)->
     $scope.title = 'People'

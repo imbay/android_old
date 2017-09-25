@@ -4,8 +4,8 @@
     <md-sidenav class="md-sidenav-left" md-component-id="leftMenu" md-whiteframe-4dp="md-whiteframe-4dp">
       <div class="user" md-colors="{backgroundColor: &quot;{{bgColor}}&quot;}">
         <div class="photo"><img src="img/no_photo.png" alt=""/></div>
-        <div class="username">@nurasyl</div>
-        <div class="name">Nurasyl Aldan</div>
+        <div class="username">@{{current_user.username}}</div>
+        <div class="name">{{current_user.first_name}} {{current_user.last_name}}</div>
       </div>
       <md-list>
         <md-list-item>
@@ -27,7 +27,7 @@
           </md-button>
         </md-list-item>
         <md-list-item>
-          <md-button layout="row" flex="flex" layout-align="start">
+          <md-button layout="row" flex="flex" layout-align="start" ng-click="deleteSession()">
             <div><i class="fa fa-sign-out"></i></div>
             <div>Exit</div>
           </md-button>
@@ -52,7 +52,7 @@
     <md-list-item layout="row">
       <md-content flex="flex">
         <div class="img"><img src="img/man.jpg" alt=""/></div>
-        <div class="info" layout="row" layout-align="space-between center">
+        <div class="info container" layout="row" layout-align="space-between center">
           <md-button flex="flex" md-colors="{color: &quot;blue&quot;}"><i class="fa fa-eye"></i><span>8475</span></md-button>
           <md-button flex="flex" md-colors="{color: &quot;green&quot;}"><i class="fa fa-thumbs-up"></i><span>883</span></md-button>
           <md-button flex="flex" md-colors="{color: &quot;red&quot;}"><i class="fa fa-thumbs-down"></i><span>25</span></md-button>
@@ -64,7 +64,7 @@
     <md-list-item layout="row">
       <md-content flex="flex">
         <div class="img"><img src="img/woman.jpg" alt=""/></div>
-        <div class="info" layout="row" layout-align="space-between center">
+        <div class="info container" layout="row" layout-align="space-between center">
           <md-button flex="flex" md-colors="{color: &quot;blue&quot;}"><i class="fa fa-eye"></i><span>5657</span></md-button>
           <md-button flex="flex" md-colors="{color: &quot;green&quot;}"><i class="fa fa-thumbs-up"></i><span>563</span></md-button>
           <md-button flex="flex" md-colors="{color: &quot;red&quot;}"><i class="fa fa-thumbs-down"></i><span>75</span></md-button>

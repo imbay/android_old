@@ -3,8 +3,8 @@ section(layout='row' flex)
         .user(md-colors='{backgroundColor: "{{bgColor}}"}')
             .photo
                 img(src='img/no_photo.png' alt='')
-            .username @nurasyl
-            .name Nurasyl Aldan
+            .username @{{current_user.username}}
+            .name {{current_user.first_name}} {{current_user.last_name}}
         md-list
             md-list-item
                 md-button(href='/#!/people' layout='row' flex layout-align='start' ng-click='leftMenu()')
@@ -22,7 +22,7 @@ section(layout='row' flex)
                         i.fa.fa-cog
                     div Settings
             md-list-item
-                md-button(layout='row' flex layout-align='start')
+                md-button(layout='row' flex layout-align='start' ng-click='deleteSession()')
                     div
                         i.fa.fa-sign-out
                     div Exit
