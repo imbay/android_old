@@ -36,6 +36,17 @@ md-toolbar
 md-input-container
     margin: 0
 
+form
+    div.error
+        font-size: 12px
+        margin-top: 35px
+        color: #ff7575
+        display: none
+    div.error.no-margin-top
+        margin-top: 0
+    md-input-container
+        margin-top: 16px
+
 div[ng-controller='JoinController'],
 div[ng-controller='RecoveryController']
     div.form

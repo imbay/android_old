@@ -3,6 +3,11 @@ rm -f www/js/lib/underscore.js &&\
 wget http://underscorejs.org/underscore-min.js &&\
 mv underscore-min.js www/js/lib/underscore.js &&\
 
+rm -f jquery-3.2.1.js &&\
+rm -f www/js/lib/jquery.js &&\
+wget https://code.jquery.com/jquery-3.2.1.js &&\
+mv jquery-3.2.1.js www/js/lib/jquery.js &&\
+
 rm -f angular-route.min.js &&\
 rm -f www/js/lib/angular-route.js &&\
 wget https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js &&\

@@ -3,13 +3,13 @@ div(ng-controller='LoginController' md-colors='{backgroundColor: "blue"}')
         .logo
             img(src='img/white_logo.png' alt='')
         .form
-            form(autocomplete='off' name='LoginForm')
+            form(onsubmit='return false' autocomplete='off' ng-submit='submit()')
                 md-input-container.md-block
-                    input(ng-model='form.username' name='username' type='text' placeholder='Username or email')
+                    input(ng-model='form.username' type='text' placeholder='Username')
                 md-input-container.md-block
-                    input(ng-model='form.password' name='password' type='password' placeholder='Password')
+                    input(ng-model='form.password' type='password' placeholder='Password')
                 div(layout='row' layout-align='center center')
-                    md-button.md-raised.md-primary(flex ng-click='submit()') Log in
+                    md-button.md-raised.md-primary(flex type='submit') Log in
         .links(layout='column')
             md-button(href='/#!/recovery') Recovery
             md-button(href='/#!/join') Registration

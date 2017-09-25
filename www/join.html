@@ -10,25 +10,31 @@
       <div class="form">
         <form autocomplete="off" name="JoinForm">
           <md-input-container class="md-block">
-            <input ng-model="form.first_name" name="first_name" type="text" placeholder="First name"/>
+            <input ng-model="form.first_name" type="text" placeholder="First name"/>
+            <div class="error first_name"></div>
           </md-input-container>
           <md-input-container class="md-block">
-            <input ng-model="form.last_name" name="last_name" type="text" placeholder="Last name"/>
+            <input ng-model="form.last_name" type="text" placeholder="Last name"/>
+            <div class="error last_name"></div>
           </md-input-container>
           <md-input-container class="md-block">
             <md-radio-group ng-model="form.gender">
               <md-radio-button class="md-primary" value="1">Male</md-radio-button>
               <md-radio-button class="md-primary" value="0">Female</md-radio-button>
             </md-radio-group>
+            <div class="error gender no-margin-top"></div>
           </md-input-container>
           <md-input-container class="md-block">
-            <input ng-model="form.email" name="email" type="text" placeholder="E-mail"/>
+            <input ng-model="form.email" type="text" placeholder="E-mail"/>
+            <div class="error email"></div>
           </md-input-container>
           <md-input-container class="md-block">
-            <input ng-model="form.username" name="username" type="text" placeholder="Username"/>
+            <input ng-model="form.username" type="text" placeholder="Username"/>
+            <div class="error username"></div>
           </md-input-container>
           <md-input-container class="md-block">
-            <input ng-model="form.password" name="password" type="text" placeholder="Password"/>
+            <input ng-model="form.password" type="text" placeholder="Password"/>
+            <div class="error password"></div>
           </md-input-container>
           <div layout="row" layout-align="center center">
             <md-button class="md-raised md-primary" flex="flex" ng-click="submit()">Join</md-button>
