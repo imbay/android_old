@@ -21,8 +21,9 @@ div(ng-controller='GentlemenController' layout='column' ng-cloak)
                     md-button(md-colors='{color: "green"}' flex)
                         i.fa.fa-thumbs-up
                 // md-divider
+                form(onsummit='return false' autocomplete='off')
                 .comment(layout='row')
                     md-input-container.md-block.no-error
-                        input(type='text' placeholder='Enter your comment here' md-detect-hidden='false')
+                        input(type='text' placeholder='Enter your comment here' md-detect-hidden='false' ng-model='form.comment' maxlength='100')
                     md-button(flex).md-primary.md-raised
                         i.fa.fa-paper-plane

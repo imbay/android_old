@@ -190,3 +190,30 @@ div[ng-controller='LadyController']
 
 md-input-container.no-error div.md-errors-spacer
     display: none
+
+div[ng-controller='MyPhotosController']
+    md-list
+        md-list-item
+            div.img
+                text-align: center
+                img
+                    height: 250px
+                    border: 1px solid $color2
+                    padding: 5px
+            div.info
+    md-divider
+        margin-bottom: 25px
+
+md-dialog.comment_dialog
+    div.md-dialog-content
+        padding: 0
+        margin: 0
+    md-list-item
+        border: 1px 0 1px 0 solid $color2
+        padding: 5px
+        margin-bottom: 5px
+        &::before
+            content: none
+        div.comment
+            font-size: 12px
+            margin-top: 5px

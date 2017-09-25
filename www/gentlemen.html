@@ -60,9 +60,10 @@
           <md-button md-colors="{color: &quot;green&quot;}" flex="flex"><i class="fa fa-thumbs-up"></i></md-button>
         </div>
         <!-- md-divider-->
+        <form onsummit="return false" autocomplete="off"></form>
         <div class="comment" layout="row">
           <md-input-container class="md-block no-error">
-            <input type="text" placeholder="Enter your comment here" md-detect-hidden="false"/>
+            <input type="text" placeholder="Enter your comment here" md-detect-hidden="false" ng-model="form.comment" maxlength="100"/>
           </md-input-container>
           <md-button class="md-primary md-raised" flex="flex"><i class="fa fa-paper-plane"></i></md-button>
         </div>

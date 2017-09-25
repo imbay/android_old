@@ -2,5 +2,39 @@ div(ng-controller='MyPhotosController' layout='column' ng-cloak)
     include ./menu.pug
     md-content(flex)
         include ./header.pug
-        div(layout='column')
-        
+    md-list(flex)
+        md-list-item(layout='row')
+            md-content(flex)
+                .img
+                    img(src='img/man.jpg' alt='')
+                .info(layout='row' layout-align='space-between center')
+                    md-button(flex md-colors='{color: "blue"}')
+                        i.fa.fa-eye
+                        span 8475
+                    md-button(flex md-colors='{color: "green"}')
+                        i.fa.fa-thumbs-up
+                        span 883
+                    md-button(flex md-colors='{color: "red"}')
+                        i.fa.fa-thumbs-down
+                        span 25
+                    md-button(flex md-colors='{color: "grey"}')
+                        i.fa.fa-comment
+        md-divider
+        md-list-item(layout='row')
+            md-content(flex)
+                .img
+                    img(src='img/woman.jpg' alt='')
+                .info(layout='row' layout-align='space-between center')
+                    md-button(flex md-colors='{color: "blue"}')
+                        i.fa.fa-eye
+                        span 5657
+                    md-button(flex md-colors='{color: "green"}')
+                        i.fa.fa-thumbs-up
+                        span 563
+                    md-button(flex md-colors='{color: "red"}')
+                        i.fa.fa-thumbs-down
+                        span 75
+                    md-button(flex md-colors='{color: "red"}' href='')
+                        i.fa.fa-comment
+                        span 5
+        md-divider

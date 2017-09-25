@@ -47,6 +47,31 @@
         <md-button class="md-icon-button" aria-label="{{title}}" ng-click="leftMenu()"><i class="fa fa-bars"></i></md-button><span>{{title}}</span>
       </div>
     </md-toolbar>
-    <div layout="column"></div>
   </md-content>
+  <md-list flex="flex">
+    <md-list-item layout="row">
+      <md-content flex="flex">
+        <div class="img"><img src="img/man.jpg" alt=""/></div>
+        <div class="info" layout="row" layout-align="space-between center">
+          <md-button flex="flex" md-colors="{color: &quot;blue&quot;}"><i class="fa fa-eye"></i><span>8475</span></md-button>
+          <md-button flex="flex" md-colors="{color: &quot;green&quot;}"><i class="fa fa-thumbs-up"></i><span>883</span></md-button>
+          <md-button flex="flex" md-colors="{color: &quot;red&quot;}"><i class="fa fa-thumbs-down"></i><span>25</span></md-button>
+          <md-button flex="flex" md-colors="{color: &quot;grey&quot;}"><i class="fa fa-comment"></i></md-button>
+        </div>
+      </md-content>
+    </md-list-item>
+    <md-divider></md-divider>
+    <md-list-item layout="row">
+      <md-content flex="flex">
+        <div class="img"><img src="img/woman.jpg" alt=""/></div>
+        <div class="info" layout="row" layout-align="space-between center">
+          <md-button flex="flex" md-colors="{color: &quot;blue&quot;}"><i class="fa fa-eye"></i><span>5657</span></md-button>
+          <md-button flex="flex" md-colors="{color: &quot;green&quot;}"><i class="fa fa-thumbs-up"></i><span>563</span></md-button>
+          <md-button flex="flex" md-colors="{color: &quot;red&quot;}"><i class="fa fa-thumbs-down"></i><span>75</span></md-button>
+          <md-button flex="flex" md-colors="{color: &quot;red&quot;}" href=""><i class="fa fa-comment"></i><span>5</span></md-button>
+        </div>
+      </md-content>
+    </md-list-item>
+    <md-divider></md-divider>
+  </md-list>
 </div>

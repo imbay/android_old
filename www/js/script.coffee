@@ -58,6 +58,11 @@ app.controller 'PeopleController', ($scope, $mdDialog)->
     $scope.title = 'People'
 app.controller 'MyPhotosController', ($scope, $mdDialog)->
     $scope.title = 'My photos'
+    $mdDialog.show({
+      templateUrl: 'comment_dialog.html',
+      parent: angular.element(document.body),
+      clickOutsideToClose: true
+    })
 app.controller 'SettingsController', ($scope, $mdDialog)->
     $scope.title = 'Settings'
 app.controller 'AboutController', ($scope, $mdDialog)->

@@ -21,8 +21,9 @@ div(ng-controller='LadyController' layout='column' ng-cloak)
                     md-button(md-colors='{color: "green"}' flex)
                         i.fa.fa-thumbs-up
                 // md-divider
-                .comment(layout='row')
-                    md-input-container.md-block.no-error.md-accent
-                        input(type='text' placeholder='Enter your comment here' md-detect-hidden='false')
-                    md-button(flex).md-raised.md-accent
-                        i.fa.fa-paper-plane
+                form(onsummit='return false' autocomplete='off')
+                    .comment(layout='row')
+                        md-input-container.md-block.no-error.md-accent
+                            input(type='text' placeholder='Enter your comment here' md-detect-hidden='false' ng-model='form.comment' maxlength='100')
+                        md-button(flex).md-raised.md-accent
+                            i.fa.fa-paper-plane
