@@ -166,6 +166,8 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
             $('.file_select_text').text('Upload photo')
         onProgressItem: (item, progress)->
             $('.file_select_text').text(progress+'%')
+        onError: ->
+            $mainScope.UnknowErrorAlert()
     })
 
     $scope.getList = ->
@@ -192,8 +194,29 @@ app.controller 'SettingsController', ($scope, $mdDialog)->
     $scope.title = 'Settings'
 app.controller 'AboutController', ($scope, $mdDialog)->
     $scope.title = 'About'
-app.controller 'GentlemenController', ($scope, $mdDialog)->
-    $scope.title = 'About'
+
+app.controller 'GentlemenController', ($scope, $mdDialog, $http)->
+    $scope.title = 'Gentlemen'
+    $http.get(api_url+'/photo/get?gender=1&session_key='+localStorage.getItem('session_key')).then((response)->
+        response = response.data
+        if response.error == 0
+            console.log response.body
+        else if response.error == 2
+            location.href = '/'
+        else if response.error == 4
+            # not found.
+            $mdDialog.show(
+                $mdDialog.alert()
+                .clickOutsideToClose(true)
+                .title('Error')
+                .textContent('Users not found')
+                .ok('OK')
+            )
+            location.href = '/#!/people'
+        else
+            $mainScope.UnknowErrorAlert()
+            
+    , $mainScope.UnknowErrorAlert)
 app.controller 'LadyController', ($scope, $mdDialog)->
-    $scope.title = 'About'
+    $scope.title = 'Lady'
     $scope.bgColor = 'pink'
