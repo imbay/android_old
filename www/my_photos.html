@@ -48,27 +48,26 @@
       </div>
     </md-toolbar>
   </md-content>
+  <div class="container" layout="column">
+    <div class="form">
+      <form autocomplete="off" name="FileForm">
+        <md-button class="md-raised" md-colors="{backgroundColor: &quot;green&quot;}" flex="flex">
+          <label for="file-input"><i class="fa fa-cloud-upload left"></i><span class="file_select_text">Upload photo</span></label>
+        </md-button>
+        <input class="ng-hide" type="file" nv-file-select="nv-file-select" uploader="uploader" accept="image/*" id="file-input"/>
+      </form>
+    </div>
+  </div>
   <md-list flex="flex">
-    <md-list-item layout="row">
+    <md-list-item layout="row" ng-repeat="photo in photos">
       <md-content flex="flex">
-        <div class="img"><img src="img/man.jpg" alt=""/></div>
+        <div class="img"><img src="{{api_url}}/photo/content/{{photo.id}}" alt=""/></div>
         <div class="info container" layout="row" layout-align="space-between center">
-          <md-button flex="flex" md-colors="{color: &quot;blue&quot;}"><i class="fa fa-eye"></i><span>8475</span></md-button>
-          <md-button flex="flex" md-colors="{color: &quot;green&quot;}"><i class="fa fa-thumbs-up"></i><span>883</span></md-button>
-          <md-button flex="flex" md-colors="{color: &quot;red&quot;}"><i class="fa fa-thumbs-down"></i><span>25</span></md-button>
-          <md-button flex="flex" md-colors="{color: &quot;grey&quot;}"><i class="fa fa-comment"></i></md-button>
-        </div>
-      </md-content>
-    </md-list-item>
-    <md-divider></md-divider>
-    <md-list-item layout="row">
-      <md-content flex="flex">
-        <div class="img"><img src="img/woman.jpg" alt=""/></div>
-        <div class="info container" layout="row" layout-align="space-between center">
-          <md-button flex="flex" md-colors="{color: &quot;blue&quot;}"><i class="fa fa-eye"></i><span>5657</span></md-button>
-          <md-button flex="flex" md-colors="{color: &quot;green&quot;}"><i class="fa fa-thumbs-up"></i><span>563</span></md-button>
-          <md-button flex="flex" md-colors="{color: &quot;red&quot;}"><i class="fa fa-thumbs-down"></i><span>75</span></md-button>
-          <md-button flex="flex" md-colors="{color: &quot;red&quot;}" href=""><i class="fa fa-comment"></i><span>5</span></md-button>
+          <md-button flex="flex" md-colors="{color: &quot;blue&quot;}"><i class="fa fa-eye"></i><span>{{photo.views}}</span></md-button>
+          <md-button flex="flex" md-colors="{color: &quot;green&quot;}"><i class="fa fa-thumbs-up"></i><span>{{photo.likes}}</span></md-button>
+          <md-button flex="flex" md-colors="{color: &quot;red&quot;}"><i class="fa fa-thumbs-down"></i><span>{{photo.dislikes}}</span></md-button>
+          <md-button flex="flex" md-colors="{color: &quot;grey&quot;}" ng-hide="photo.new_comments != 0"><i class="fa fa-comment"></i><span>{{photo.comments}}</span></md-button>
+          <md-button flex="flex" md-colors="{color: &quot;red&quot;}" ng-hide="photo.new_comments == 0"><i class="fa fa-comment"></i><span>{{photo.new_comments}}</span></md-button>
         </div>
       </md-content>
     </md-list-item>

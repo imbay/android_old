@@ -70,4 +70,13 @@ rm v1.6.4.zip &&\
 mv Framework7-1.6.4/dist/js/framework7.min.js www/js/lib/framework7.js &&\
 mv Framework7-1.6.4/dist/css/framework7.material.min.css www/css/lib/framework7.material.css &&\
 mv Framework7-1.6.4/dist/css/framework7.material.colors.min.css www/css/lib/framework7.material.colors.css &&\
-rm -r Framework7-1.6.4
+rm -r Framework7-1.6.4 &&\
+
+rm -f master.zip &&\
+rm -rf angular-file-upload-master &&\
+rm -f www/js/lib/angular-file-upload.js &&\
+wget https://github.com/nervgh/angular-file-upload/archive/master.zip &&\
+unzip master.zip &&\
+rm master.zip &&\
+mv angular-file-upload-master/dist/angular-file-upload.min.js www/js/lib/angular-file-upload.js &&\
+rm -r angular-file-upload-master

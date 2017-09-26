@@ -2,39 +2,33 @@ div(ng-controller='MyPhotosController' layout='column' ng-cloak)
     include ./menu.pug
     md-content(flex)
         include ./header.pug
+    div(layout='column').container
+        div.form
+            form(autocomplete='off' name='FileForm')
+                md-button.md-raised(md-colors='{backgroundColor: "green"}' flex)
+                    label(for='file-input')
+                        i.fa.fa-cloud-upload.left
+                        span.file_select_text Upload photo
+                input(type='file' nv-file-select uploader='uploader' accept='image/*')#file-input.ng-hide
     md-list(flex)
-        md-list-item(layout='row')
+        md-list-item(layout='row' ng-repeat='photo in photos')
             md-content(flex)
                 .img
-                    img(src='img/man.jpg' alt='')
+                    img(src='{{api_url}}/photo/content/{{photo.id}}' alt='')
                 .info(layout='row' layout-align='space-between center').container
                     md-button(flex md-colors='{color: "blue"}')
                         i.fa.fa-eye
-                        span 8475
+                        span {{photo.views}}
                     md-button(flex md-colors='{color: "green"}')
                         i.fa.fa-thumbs-up
-                        span 883
+                        span {{photo.likes}}
                     md-button(flex md-colors='{color: "red"}')
                         i.fa.fa-thumbs-down
-                        span 25
-                    md-button(flex md-colors='{color: "grey"}')
+                        span {{photo.dislikes}}
+                    md-button(flex md-colors='{color: "grey"}' ng-hide='photo.new_comments != 0')
                         i.fa.fa-comment
-        md-divider
-        md-list-item(layout='row')
-            md-content(flex)
-                .img
-                    img(src='img/woman.jpg' alt='')
-                .info(layout='row' layout-align='space-between center').container
-                    md-button(flex md-colors='{color: "blue"}')
-                        i.fa.fa-eye
-                        span 5657
-                    md-button(flex md-colors='{color: "green"}')
-                        i.fa.fa-thumbs-up
-                        span 563
-                    md-button(flex md-colors='{color: "red"}')
-                        i.fa.fa-thumbs-down
-                        span 75
-                    md-button(flex md-colors='{color: "red"}' href='')
+                        span {{photo.comments}}
+                    md-button(flex md-colors='{color: "red"}' ng-hide='photo.new_comments == 0')
                         i.fa.fa-comment
-                        span 5
+                        span {{photo.new_comments}}
         md-divider

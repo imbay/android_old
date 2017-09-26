@@ -12,7 +12,7 @@ showFormErrors = (formElement, server_errors, errors_normalizer)->
         formElement.find("div.error.#{key}").text(value.join(', '))
         formElement.find("div.error.#{key}").show()
 
-app = angular.module 'imbay', ['ngMaterial', 'ngRoute', 'ngMessages', 'ngAnimate']
+app = angular.module 'imbay', ['ngMaterial', 'ngRoute', 'ngMessages', 'ngAnimate', 'angularFileUpload']
 app.config ($mdThemingProvider)->
     $mdThemingProvider.theme('default')
         .primaryPalette('blue')
@@ -53,6 +53,7 @@ app.config ($routeProvider)->
 
 $mainScope = null
 app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http)->
+    $scope.api_url = api_url
     $scope.bgColor = 'blue'
     $scope.leftMenu = ->
         $mdSidenav('leftMenu').toggle()
@@ -136,19 +137,57 @@ app.controller 'JoinController', ($scope, $mdDialog, $http)->
                     }
                 })
             else
-                location.href = '/#!/people'
+                $http.post(api_url+'account/sign_in', { username: $scope.form.username, password: $scope.form.password }).then((response)->
+                    response = response.data
+                    if response.error == 0
+                        localStorage.setItem('session_key', response.body)
+                        location.href = '/'
+                    else
+                        $mainScope.UnknowErrorAlert
+                , $mainScope.UnknowErrorAlert)
+                
         , $mainScope.UnknowErrorAlert)
 app.controller 'RecoveryController', ($scope, $mdDialog)->
 
 app.controller 'PeopleController', ($scope, $mdDialog)->
     $scope.title = 'People'
-app.controller 'MyPhotosController', ($scope, $mdDialog)->
+app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
     $scope.title = 'My photos'
-    $mdDialog.show({
-    templateUrl: 'comment_dialog.html',
-    parent: angular.element(document.body),
-    clickOutsideToClose: true
+    $scope.photos = []
+    $scope.uploader = new FileUploader({
+        url: api_url+'/photo/upload',
+        alias: 'photo',
+        autoUpload: true,
+        method: 'post',
+        removeAfterUpload: true,
+        formData: ['session_key': localStorage.getItem('session_key')],
+        onSuccessItem: ->
+            $scope.getList()
+            $('.file_select_text').text('Upload photo')
+        onProgressItem: (item, progress)->
+            $('.file_select_text').text(progress+'%')
     })
+
+    $scope.getList = ->
+        $http.get(api_url+'/photo/list?session_key='+localStorage.getItem('session_key')).then((response)->
+            response = response.data
+            if response.error == 0
+                $scope.photos = response.body
+            else if response.error == 2
+                location.href = '/'
+            else
+                $mainScope.UnknowErrorAlert()
+                
+        , $mainScope.UnknowErrorAlert)
+    $scope.getList()
+        
+    ###
+    $mdDialog.show({
+        templateUrl: 'comment_dialog.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: true
+    })
+    ###
 app.controller 'SettingsController', ($scope, $mdDialog)->
     $scope.title = 'Settings'
 app.controller 'AboutController', ($scope, $mdDialog)->
