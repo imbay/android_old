@@ -31,4 +31,6 @@ div(ng-controller='MyPhotosController' layout='column' ng-cloak)
                     md-button(flex md-colors='{color: "red"}' ng-hide='photo.new_comments == 0' ng-click='show_dialog(photo.id)')
                         i.fa.fa-comment
                         span {{photo.new_comments}}
+                    md-button(flex md-colors='{color: "red"}' ng-click='remove(photo.id)')
+                        i.fa.fa-trash
         md-divider

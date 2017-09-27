@@ -55,6 +55,9 @@ $mainScope = null
 app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http)->
     $scope.api_url = api_url
     $scope.bgColor = 'blue'
+    $scope.is_auth = false
+    $scope.current_user = null
+
     $scope.leftMenu = ->
         $mdSidenav('leftMenu').toggle()
     $scope.UnknowErrorAlert = ->
@@ -65,7 +68,6 @@ app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http
             .textContent('Unknow error')
             .ok('OK')
         )
-    $scope.is_auth = false
     $scope.getCurrentUser = (callback)->
         $http.post(api_url+'account/current_user', { session_key: localStorage.getItem('session_key') }).then((response)->
             response = response.data
@@ -82,16 +84,25 @@ app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http
                 $scope.UnknowErrorAlert()
             return null
         , $scope.UnknowErrorAlert)
-    
-    $scope.getCurrentUser((response)->
-        if response != null
-            # Is auth.
-            location.href = '/#!/people'
-            $scope.current_user = response
-        else
-            # Is not auth.
-            location.href = '/#!/login'
-    )
+
+    if navigator.onLine == true
+        $scope.getCurrentUser((response)->
+            if response != null
+                # Is auth.
+                location.href = '/#!/people'
+                $scope.current_user = response
+            else
+                # Is not auth.
+                location.href = '/#!/login'
+        )
+    else
+        $mdDialog.show(
+            $mdDialog.alert()
+            .clickOutsideToClose(true)
+            .title('Error')
+            .textContent('No internet connection')
+            .ok('OK')
+        )
     
     $mainScope = $scope
 
@@ -199,6 +210,25 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
             else
                 $mainScope.UnknowErrorAlert()
         , $mainScope.UnknowErrorAlert)
+    
+    remove_confirm = $mdDialog.confirm()
+                        .title('?')
+                        .textContent('All remove')
+                        .ok('Yes')
+                        .cancel('No')
+
+    $scope.remove = (photo_id)->
+        $mdDialog.show(remove_confirm).then(->
+            $http.post(api_url+'photo/delete', { photo_id: photo_id, session_key: localStorage.getItem('session_key') }).then((response)->
+                response = response.data
+                if response.error == 0
+                    $scope.getList()
+                else
+                    $mainScope.UnknowErrorAlert
+            , $mainScope.UnknowErrorAlert)
+        , ->
+            # not remove callback.
+        )
 
 app.controller 'SettingsController', ($scope, $mdDialog)->
     $scope.title = 'Settings'
