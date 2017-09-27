@@ -8,14 +8,14 @@
   </md-toolbar>
   <md-dialog-content>
     <div class="md-dialog-content">
-      <md-content layout-padding="layout-padding" layout-align="center" ng-show="comments == 0" md-colors="{color: &quot;grey&quot;}">Empty</md-content>
+      <md-content layout-padding="layout-padding" style="text-align: center;" ng-show="comments.length == 0" md-colors="{color: &quot;grey&quot;}">Empty</md-content>
       <md-list flex="flex" ng-show="comments.length &gt; 0">
         <md-list-item layout="column" layout-align="left" ng-repeat="comment in comments">
           <div class="user_info" md-colors="{color: &quot;blue&quot;}" layout="row">
             <div class="photo"><img src="img/no_photo.png" alt=""/></div>
             <div class="name" layout="column"><span class="full_name">{{ comment.first_name }} {{ comment.last_name }}</span><span class="username">@{{comment.username}}</span></div>
           </div>
-          <div class="comment" md-colors="{color: &quot;grey&quot;}">{{ comment.text }}</div>
+          <div class="comment text" md-colors="{color: &quot;grey&quot;}">{{ comment.text }}</div>
           <md-divider></md-divider>
         </md-list-item>
       </md-list>

@@ -16,13 +16,13 @@ ext = {
 	css: '.css'
 },
 liveReload = {
-	on: true, // turn on?
+	on: false, // turn on?
 	host: '127.0.0.1',
 	port: 2001,
 	baseDir: './www',
 	open: false,
 	notify: false
-};
+}
 // Require modules.
 const
 	gulp = require('gulp'),
@@ -93,5 +93,21 @@ gulp.task('start', ['html', 'js', 'css'], function() {
 	// Watch css files.
 	watch(dir.css, function() {
 		gulp.start('css');
+	});
+});
+
+gulp.task('serve', function() {
+	const
+	server = {
+		port: 1996,
+		baseDir: 'www'
+	},
+	express = require('express'),
+	app = express();
+	
+	app.use(express.static(server.baseDir));
+	
+	app.listen(server.port, function () {
+		console.log('Static server listening on port 1996')
 	});
 });

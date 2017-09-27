@@ -59,6 +59,7 @@
     </div>
   </div>
   <md-list flex="flex">
+    <md-content layout-padding="layout-padding" style="text-align: center;" ng-show="photos.length == 0" md-colors="{color: &quot;grey&quot;}">Empty</md-content>
     <md-list-item layout="row" ng-repeat="photo in photos">
       <md-content flex="flex">
         <div class="img"><img src="{{api_url}}/photo/content/{{photo.id}}" alt=""/></div>

@@ -41,11 +41,8 @@ app.config ($routeProvider)->
     .when '/about', {
         templateUrl: '/about.html',
     }
-    .when '/gentlemen', {
-        templateUrl: '/gentlemen.html',
-    }
-    .when '/lady', {
-        templateUrl: '/lady.html',
+    .when '/photo', {
+        templateUrl: '/photo.html',
     }
     .when '/my_photos', {
         templateUrl: '/my_photos.html',
@@ -58,21 +55,32 @@ app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http
     $scope.is_auth = false
     $scope.current_user = null
 
+    $scope.alert = {
+        success: (message = 'Success')->
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .clickOutsideToClose(true)
+                    .title('Success')
+                    .textContent(message)
+                    .ok('OK')
+            )
+        error: (message = 'Unknow')->
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .clickOutsideToClose(true)
+                    .title('Error')
+                    .textContent(message)
+                    .ok('OK')
+            )
+    }
+
     $scope.leftMenu = ->
         $mdSidenav('leftMenu').toggle()
-    $scope.UnknowErrorAlert = ->
-        $mdDialog.show(
-            $mdDialog.alert()
-            .clickOutsideToClose(true)
-            .title('Error')
-            .textContent('Unknow error')
-            .ok('OK')
-        )
     $scope.getCurrentUser = (callback)->
         $http.post(api_url+'/account/current_user', { session_key: localStorage.getItem('session_key') }).then((response)->
             response = response.data
             callback(response.body)
-        , $scope.UnknowErrorAlert)
+        , $scope.alert.error)
     
     $scope.deleteSession = ->
         $http.post(api_url+'/account/sign_out', { session_key: localStorage.getItem('session_key') }).then((response)->
@@ -81,9 +89,9 @@ app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http
                 localStorage.setItem('session_key', null)
                 location.href = '/'
             else
-                $scope.UnknowErrorAlert()
+                $scope.alert.error()
             return null
-        , $scope.UnknowErrorAlert)
+        , $scope.alert.error)
 
     if navigator.onLine == true
         $scope.getCurrentUser((response)->
@@ -126,8 +134,8 @@ app.controller 'LoginController', ($scope, $mdDialog, $http)->
                 localStorage.setItem('session_key', response.body)
                 location.href = '/'
             else
-                $mainScope.UnknowErrorAlert
-        , $mainScope.UnknowErrorAlert)
+                $mainScope.alert.error
+        , $mainScope.alert.error)
 app.controller 'JoinController', ($scope, $mdDialog, $http)->
     $scope.form = {
         first_name: '',
@@ -154,11 +162,10 @@ app.controller 'JoinController', ($scope, $mdDialog, $http)->
                         localStorage.setItem('session_key', response.body)
                         location.href = '/'
                     else
-                        $mainScope.UnknowErrorAlert
-                , $mainScope.UnknowErrorAlert)
+                        $mainScope.alert.error
+                , $mainScope.alert.error)
                 
-        , $mainScope.UnknowErrorAlert)
-app.controller 'RecoveryController', ($scope, $mdDialog)->
+        , $mainScope.alert.error)
 
 app.controller 'PeopleController', ($scope, $mdDialog)->
     $scope.title = 'People'
@@ -172,13 +179,30 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
         method: 'post',
         removeAfterUpload: true,
         formData: ['session_key': localStorage.getItem('session_key')],
-        onSuccessItem: ->
+        onSuccessItem: (item, response)->
+            if response.error == 0
+                $mainScope.alert.success()
+            else if response.error == 3
+                if response.body['image'].includes('invalid')
+                    $mainScope.alert.error('invalid')
+                else if response.body['image'].includes('mime')
+                    $mainScope.alert.error('mime')
+                else if response.body['image'].includes('size')
+                    $mainScope.alert.error('size')
+                else if response.body['image'].includes('pixels')
+                    $mainScope.alert.error('pixels')
+                else if response.body['image'].includes('count')
+                    $mainScope.alert.error('count')
+                else
+                    $mainScope.error.alert()
+            else
+                $mainScope.alert.error()
             $scope.getList()
             $('.file_select_text').text('Upload photo')
         onProgressItem: (item, progress)->
             $('.file_select_text').text(progress+'%')
         onError: ->
-            $mainScope.UnknowErrorAlert()
+            $mainScope.alert.error()
     })
 
     $scope.getList = ->
@@ -189,9 +213,9 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
             else if response.error == 2
                 location.href = '/'
             else
-                $mainScope.UnknowErrorAlert()
+                $mainScope.alert.error()
                 
-        , $mainScope.UnknowErrorAlert)
+        , $mainScope.alert.error)
     $scope.getList()
 
     $scope.show_dialog = (photo_id)->
@@ -209,8 +233,8 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
                             $mdDialog.cancel()
                 })
             else
-                $mainScope.UnknowErrorAlert()
-        , $mainScope.UnknowErrorAlert)
+                $mainScope.alert.error()
+        , $mainScope.alert.error)
     
     remove_confirm = $mdDialog.confirm()
                         .title('?')
@@ -225,62 +249,82 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
                 if response.error == 0
                     $scope.getList()
                 else
-                    $mainScope.UnknowErrorAlert
-            , $mainScope.UnknowErrorAlert)
+                    $mainScope.alert.error
+            , $mainScope.alert.error)
         , ->
             # not remove callback.
         )
 
 app.controller 'SettingsController', ($scope, $mdDialog)->
     $scope.title = 'Settings'
+    $scope.form = {
+        first_name: $mainScope.current_user.first_name
+        last_name: $mainScope.current_user.last_name
+        gender: $mainScope.current_user.gender
+
+        username: $mainScope.current_user.username
+    }
 app.controller 'AboutController', ($scope, $mdDialog)->
     $scope.title = 'About'
 
-app.controller 'GentlemenController', ($scope, $mdDialog, $http)->
+app.controller 'PhotoController', ($scope, $mdDialog, $http, $routeParams)->
     $scope.title = 'Gentlemen'
+    $scope.bgColor = 'blue'
     $scope.form = {
         text: ''
     }
+    
+    if $routeParams['gender'] == "0"
+        $scope.title = 'Lady'
+        $scope.bgColor = 'pink'
+
     $scope.like = null
-    $http.get(api_url+'/photo/get?gender=1&session_key='+localStorage.getItem('session_key')).then((response)->
-        response = response.data
-        if response.error == 0
-            $scope.photo = response.body
-            $scope.like = $scope.photo.like
+    $scope.get = ->
+        $http.get(api_url+'/photo/get?gender='+$routeParams['gender']+'&session_key='+localStorage.getItem('session_key')).then((response)->
+            response = response.data
+            if response.error == 0
+                $scope.photo = response.body
+                $scope.like = $scope.photo.like
 
-            # View image.
-            $http.post(api_url+'/photo/to_view', { photo_id: $scope.photo.id, session_key: localStorage.getItem('session_key') }).then((response)->
-                response = response.data
-            , $mainScope.UnknowErrorAlert)
-
-            $scope.to_like = (like)->
-                $http.post(api_url+'/photo/to_like', { photo_id: $scope.photo.id, up: like, session_key: localStorage.getItem('session_key') }).then((response)->
+                # View image.
+                $http.post(api_url+'/photo/to_view', { photo_id: $scope.photo.id, session_key: localStorage.getItem('session_key') }).then((response)->
                     response = response.data
-                    if response.error == 0
-                        $scope.like = like
-                , $mainScope.UnknowErrorAlert)
+                , $mainScope.alert.error)
 
-        else if response.error == 2
-            location.href = '/'
-        else if response.error == 4
-            # photos not found.
-            $mdDialog.show(
-                $mdDialog.alert()
-                .clickOutsideToClose(true)
-                .title('Error')
-                .textContent('Photos not found')
-                .ok('OK')
-            )
-            location.href = '/#!/people'
-        else
-            $mainScope.UnknowErrorAlert()
-            
-    , $mainScope.UnknowErrorAlert)
+                $scope.to_like = (like)->
+                    $http.post(api_url+'/photo/to_like', { photo_id: $scope.photo.id, up: like, session_key: localStorage.getItem('session_key') }).then((response)->
+                        response = response.data
+                        if response.error == 0
+                            $scope.like = like
+                    , $mainScope.alert.error)
+
+            else if response.error == 2
+                location.href = '/'
+            else if response.error == 4
+                # photos not found.
+                $mainScope.alert.error('Photo not found')
+                location.href = '/#!/people'
+            else
+                $mainScope.alert.error()
+                
+        , $mainScope.alert.error)
+    $scope.get()
+
     $scope.write_comment = ->
         $http.post(api_url+'/photo/write_comment', { photo_id: $scope.photo.id, text: $scope.form.text, session_key: localStorage.getItem('session_key') }).then((response)->
             response = response.data
-            console.log response
-        , $mainScope.UnknowErrorAlert)
-app.controller 'LadyController', ($scope, $mdDialog)->
-    $scope.title = 'Lady'
-    $scope.bgColor = 'pink'
+            if response.error == 0
+                $scope.form.text = ''
+                $mainScope.alert.success('Success')
+            else if response.error == 3
+                try
+                    response.body['text']['min']
+                    $mainScope.alert.error('Min')
+                catch
+                try
+                    response.body['comment']['count']
+                    $mainScope.alert.error('Limit')
+                catch
+            else
+                $mainScope.alert.error()
+        , $mainScope.alert.error)

@@ -25,16 +25,6 @@ div(ng-controller='SettingsController' layout='column' ng-cloak)
                 .form
                     form(autocomplete='off')
                         md-input-container.md-block
-                            input(ng-model='form.password' type='text' placeholder='Password')
-                        div(layout='row' layout-align='center center')
-                            md-button.md-raised.md-primary(flex ng-click='submit()') Update
-                .form
-                    form(autocomplete='off')
-                        md-input-container.md-block(flex-gt-sm)
-                            label Language
-                            md-select(ng-model='form.language')
-                                md-option(value='kk') Қазақша
-                                md-option(value='ru') Русский
-                                md-option(value='en') English
+                            input(ng-model='form.password' type='text' placeholder='New password')
                         div(layout='row' layout-align='center center')
                             md-button.md-raised.md-primary(flex ng-click='submit()') Update

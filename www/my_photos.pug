@@ -11,6 +11,7 @@ div(ng-controller='MyPhotosController' layout='column' ng-cloak)
                         span.file_select_text Upload photo
                 input(type='file' nv-file-select uploader='uploader' accept='image/*')#file-input.ng-hide
     md-list(flex)
+        md-content(layout-padding style='text-align: center' ng-show='photos.length == 0' md-colors='{color: "grey"}') Empty
         md-list-item(layout='row' ng-repeat='photo in photos')
             md-content(flex)
                 .img

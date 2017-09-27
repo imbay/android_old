@@ -6,11 +6,11 @@ div(ng-controller='PeopleController' layout='column' ng-cloak)
             .logo
                 img(src='img/main_logo.png' alt='')
                 .buttons(layout='column').container
-                    md-button(md-colors='{backgroundColor: "blue"}' href='/#!/gentlemen')
+                    md-button(md-colors='{backgroundColor: "blue"}' href='/#!/photo?gender=1')
                         i.fa.fa-mars
                         span Gentlemen
                         i.fa.fa-arrow-right
-                    md-button(md-colors='{backgroundColor: "pink"}' href='/#!/lady')
+                    md-button(md-colors='{backgroundColor: "pink"}' href='/#!/photo?gender=0')
                         i.fa.fa-venus
                         span Lady
                         i.fa.fa-arrow-right

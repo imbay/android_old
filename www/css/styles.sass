@@ -163,8 +163,7 @@ div[ng-controller='AboutController']
             color: gray
             margin-top: 70px
 
-div[ng-controller='GentlemenController'],
-div[ng-controller='LadyController']
+div[ng-controller='PhotoController']
     div.image,
     div.likes,
     div.comment
@@ -173,23 +172,25 @@ div[ng-controller='LadyController']
     div.image
         text-align: center
         img
-            height: 275px
+            max-width: 300px
             border: 1px solid $color2
             padding: 3px
             border-radius: 3px
     div.name_and_likes
         button
+            min-width: 50px
             padding-top: 7px
             i.fa
-                font-size: 25px
+                font-size: 22px
         div.name
             text-align: center
+            min-width: 150px
             div.username
                 color: rgba(0,0,0,0.5)
                 font-size: 15px
             div.full_name
     div.comment
-        margin-top: -20px
+        margin-top: -10px
         md-input-container
             margin-top: 9px
             width: 80%
@@ -208,7 +209,7 @@ div[ng-controller='MyPhotosController']
             div.img
                 text-align: center
                 img
-                    height: 250px
+                    max-width: 500px
                     border: 1px solid $color2
                     padding: 5px
             div.info
@@ -228,7 +229,7 @@ md-dialog.comment_dialog
         &::before
             content: none
         div.comment
-            font-size: 12px
+            font-size: 14px
             padding: 3px
             text-align: left
         div.user_info

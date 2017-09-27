@@ -6,7 +6,7 @@ md-dialog.comment_dialog
                 i.fa.fa-close
     md-dialog-content
         div.md-dialog-content
-            md-content(layout-padding layout-align='center' ng-show='comments == 0' md-colors='{color: "grey"}') Empty
+            md-content(layout-padding style='text-align: center' ng-show='comments.length == 0' md-colors='{color: "grey"}') Empty
             md-list(flex ng-show='comments.length > 0')
                 md-list-item(layout='column' layout-align='left' ng-repeat='comment in comments')
                     .user_info(md-colors='{color: "blue"}' layout='row')
@@ -15,5 +15,5 @@ md-dialog.comment_dialog
                         .name(layout='column')
                             span.full_name {{ comment.first_name }} {{ comment.last_name }}
                             span.username @{{comment.username}}
-                    .comment(md-colors='{color: "grey"}') {{ comment.text }}
+                    .comment(md-colors='{color: "grey"}').text {{ comment.text }}
                     md-divider
