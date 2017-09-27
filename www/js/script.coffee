@@ -12,6 +12,9 @@ showFormErrors = (formElement, server_errors, errors_normalizer)->
         formElement.find("div.error.#{key}").text(value.join(', '))
         formElement.find("div.error.#{key}").show()
 
+hideFormErrors = (formElement)->
+    formElement.find('div.error').hide()
+
 app = angular.module 'imbay', ['ngMaterial', 'ngRoute', 'ngMessages', 'ngAnimate', 'angularFileUpload']
 app.config ($mdThemingProvider)->
     $mdThemingProvider.theme('default')
@@ -252,18 +255,86 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
                     $mainScope.alert.error
             , $mainScope.alert.error)
         , ->
-            # not remove callback.
+            # cancel callback.
         )
 
-app.controller 'SettingsController', ($scope, $mdDialog)->
+app.controller 'SettingsController', ($scope, $http, $mdDialog)->
     $scope.title = 'Settings'
     $scope.form = {
+        session_key: localStorage.getItem('session_key')
+
         first_name: $mainScope.current_user.first_name
         last_name: $mainScope.current_user.last_name
         gender: $mainScope.current_user.gender
 
         username: $mainScope.current_user.username
+        password: ''
     }
+    $scope.update = ->
+        $http.post(api_url+'/account/update', $scope.form).then((response)->
+            response = response.data
+            if response.error == 0
+                $mainScope.alert.success()
+                $scope.form.first_name = response.body.first_name
+                $scope.form.last_name = response.body.last_name
+                $scope.form.gender = response.body.gender
+
+                $mainScope.current_user.first_name = response.body.first_name
+                $mainScope.current_user.last_name = response.body.last_name
+                $mainScope.current_user.gender = response.body.gender
+
+                hideFormErrors($('form.update'))
+            else if response.error == 3
+                showFormErrors($('form.update'), response.body, {
+                    first_name: {
+                        min: 'Required',
+                        max: 'Maximum',
+                    }
+                })
+            else
+                $mainScope.alert.error()
+        , $mainScope.alert.error)
+
+    $scope.update_username = ->
+        $http.post(api_url+'/account/update/username', $scope.form).then((response)->
+            response = response.data
+            if response.error == 0
+                $mainScope.alert.success()
+                $scope.form.username = response.body.username
+                $mainScope.current_user.username = response.body.username
+
+                hideFormErrors($('form.update_username'))
+            else if response.error == 3
+                showFormErrors($('form.update_username'), response.body, {
+                    username: {
+                        min: 'Required',
+                        max: 'Maximum',
+                    }
+                })
+            else
+                $mainScope.alert.error()
+        , $mainScope.alert.error)
+
+    $scope.update_password = ->
+        $http.post(api_url+'/account/update/password', $scope.form).then((response)->
+            response = response.data
+            if response.error == 0
+                $mainScope.alert.success()
+                $scope.form.password = ''
+                $mainScope.current_user.password = response.body.password
+                localStorage.setItem('session_key', response.body)
+                hideFormErrors($('form.update_password'))
+            else if response.error == 3
+                showFormErrors($('form.update_password'), response.body, {
+                    password: {
+                        min: 'Required',
+                        max: 'Maximum',
+                    }
+                })
+            else
+                $mainScope.alert.error()
+        , $mainScope.alert.error)
+
 app.controller 'AboutController', ($scope, $mdDialog)->
     $scope.title = 'About'
 

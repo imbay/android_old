@@ -50,41 +50,46 @@
     <div class="container">
       <div layout="column" layout-padding="layout-padding" ng-cloak="ng-cloak">
         <div class="form">
-          <form autocomplete="off">
+          <form class="update" autocomplete="off" ng-submit="update()">
             <md-input-container class="md-block">
               <input ng-model="form.first_name" type="text" placeholder="First name"/>
+              <div class="error first_name"></div>
             </md-input-container>
             <md-input-container class="md-block">
               <input ng-model="form.last_name" type="text" placeholder="Last name"/>
+              <div class="error last_name"></div>
             </md-input-container>
             <md-input-container class="md-block">
               <md-radio-group ng-model="form.gender">
                 <md-radio-button class="md-primary" value="1">Male</md-radio-button>
                 <md-radio-button class="md-primary" value="0">Female</md-radio-button>
               </md-radio-group>
+              <div class="error gender no-margin-top"></div>
             </md-input-container>
             <div layout="row" layout-align="center center">
-              <md-button class="md-raised md-primary" flex="flex" ng-click="submit()">Update</md-button>
+              <md-button class="md-raised md-primary" flex="flex" type="submit">Save</md-button>
             </div>
           </form>
         </div>
         <div class="form">
-          <form autocomplete="off">
+          <form class="update_username" autocomplete="off" ng-submit="update_username()">
             <md-input-container class="md-block">
               <input ng-model="form.username" type="text" placeholder="Username"/>
+              <div class="error username"></div>
             </md-input-container>
             <div layout="row" layout-align="center center">
-              <md-button class="md-raised md-primary" flex="flex" ng-click="submit()">Update</md-button>
+              <md-button class="md-raised md-primary" flex="flex" type="submit">Save</md-button>
             </div>
           </form>
         </div>
         <div class="form">
-          <form autocomplete="off">
+          <form class="update_password" autocomplete="off" ng-submit="update_password()">
             <md-input-container class="md-block">
               <input ng-model="form.password" type="text" placeholder="New password"/>
+              <div class="error password"></div>
             </md-input-container>
             <div layout="row" layout-align="center center">
-              <md-button class="md-raised md-primary" flex="flex" ng-click="submit()">Update</md-button>
+              <md-button class="md-raised md-primary" flex="flex" type="submit">Save</md-button>
             </div>
           </form>
         </div>

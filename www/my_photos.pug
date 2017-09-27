@@ -17,15 +17,15 @@ div(ng-controller='MyPhotosController' layout='column' ng-cloak)
                 .img
                     img(src='{{api_url}}/photo/content/{{photo.id}}' alt='')
                 .info(layout='row' layout-align='space-between center').container
-                    md-button(flex md-colors='{color: "blue"}')
-                        i.fa.fa-eye
-                        span {{photo.views}}
                     md-button(flex md-colors='{color: "green"}')
                         i.fa.fa-thumbs-up
                         span {{photo.likes}}
                     md-button(flex md-colors='{color: "red"}')
                         i.fa.fa-thumbs-down
                         span {{photo.dislikes}}
+                    md-button(flex md-colors='{color: "blue"}')
+                        i.fa.fa-eye
+                        span {{photo.views}}
                     md-button(flex md-colors='{color: "grey"}' ng-hide='photo.new_comments != 0' ng-click='show_dialog(photo.id)')
                         i.fa.fa-comment
                         span {{photo.comments}}

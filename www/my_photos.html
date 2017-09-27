@@ -64,9 +64,9 @@
       <md-content flex="flex">
         <div class="img"><img src="{{api_url}}/photo/content/{{photo.id}}" alt=""/></div>
         <div class="info container" layout="row" layout-align="space-between center">
-          <md-button flex="flex" md-colors="{color: &quot;blue&quot;}"><i class="fa fa-eye"></i><span>{{photo.views}}</span></md-button>
           <md-button flex="flex" md-colors="{color: &quot;green&quot;}"><i class="fa fa-thumbs-up"></i><span>{{photo.likes}}</span></md-button>
           <md-button flex="flex" md-colors="{color: &quot;red&quot;}"><i class="fa fa-thumbs-down"></i><span>{{photo.dislikes}}</span></md-button>
+          <md-button flex="flex" md-colors="{color: &quot;blue&quot;}"><i class="fa fa-eye"></i><span>{{photo.views}}</span></md-button>
           <md-button flex="flex" md-colors="{color: &quot;grey&quot;}" ng-hide="photo.new_comments != 0" ng-click="show_dialog(photo.id)"><i class="fa fa-comment"></i><span>{{photo.comments}}</span></md-button>
           <md-button flex="flex" md-colors="{color: &quot;red&quot;}" ng-hide="photo.new_comments == 0" ng-click="show_dialog(photo.id)"><i class="fa fa-comment"></i><span>{{photo.new_comments}}</span></md-button>
           <md-button flex="flex" md-colors="{color: &quot;red&quot;}" ng-click="remove(photo.id)"><i class="fa fa-trash"></i></md-button>

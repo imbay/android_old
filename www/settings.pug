@@ -5,26 +5,31 @@ div(ng-controller='SettingsController' layout='column' ng-cloak)
         .container
             div(layout='column' layout-padding ng-cloak)
                 .form
-                    form(autocomplete='off')
+                    form(autocomplete='off' ng-submit='update()').update
                         md-input-container.md-block
                             input(ng-model='form.first_name' type='text' placeholder='First name')
+                            div.error.first_name
                         md-input-container.md-block
                             input(ng-model='form.last_name' type='text' placeholder='Last name')
+                            div.error.last_name
                         md-input-container.md-block
                             md-radio-group(ng-model='form.gender')
                                 md-radio-button(value='1').md-primary Male
                                 md-radio-button(value='0').md-primary Female
+                            div.error.gender.no-margin-top
                         div(layout='row' layout-align='center center')
-                            md-button.md-raised.md-primary(flex ng-click='submit()') Update
+                            md-button.md-raised.md-primary(flex type='submit') Save
                 .form
-                    form(autocomplete='off')
+                    form(autocomplete='off' ng-submit='update_username()').update_username
                         md-input-container.md-block
                             input(ng-model='form.username' type='text' placeholder='Username')
+                            div.error.username
                         div(layout='row' layout-align='center center')
-                            md-button.md-raised.md-primary(flex ng-click='submit()') Update
+                            md-button.md-raised.md-primary(flex type='submit') Save
                 .form
-                    form(autocomplete='off')
+                    form(autocomplete='off' ng-submit='update_password()').update_password
                         md-input-container.md-block
                             input(ng-model='form.password' type='text' placeholder='New password')
+                            div.error.password
                         div(layout='row' layout-align='center center')
-                            md-button.md-raised.md-primary(flex ng-click='submit()') Update
+                            md-button.md-raised.md-primary(flex type='submit') Save
