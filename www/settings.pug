@@ -7,29 +7,29 @@ div(ng-controller='SettingsController' layout='column' ng-cloak)
                 .form
                     form(autocomplete='off' ng-submit='update()').update
                         md-input-container.md-block
-                            input(ng-model='form.first_name' type='text' placeholder='First name')
+                            input(ng-model='form.first_name' type='text' placeholder='Имя' maxlength='15')
                             div.error.first_name
                         md-input-container.md-block
-                            input(ng-model='form.last_name' type='text' placeholder='Last name')
+                            input(ng-model='form.last_name' type='text' placeholder='Фамилия' maxlength='15')
                             div.error.last_name
                         md-input-container.md-block
                             md-radio-group(ng-model='form.gender')
-                                md-radio-button(value='1').md-primary Male
-                                md-radio-button(value='0').md-primary Female
+                                md-radio-button(value='1').md-primary Парень
+                                md-radio-button(value='0').md-primary Девушка
                             div.error.gender.no-margin-top
                         div(layout='row' layout-align='center center')
-                            md-button.md-raised.md-primary(flex type='submit') Save
+                            md-button.md-raised.md-primary(flex type='submit') Сохранить
                 .form
                     form(autocomplete='off' ng-submit='update_username()').update_username
                         md-input-container.md-block
-                            input(ng-model='form.username' type='text' placeholder='Username')
+                            input(ng-model='form.username' type='text' placeholder='Имя пользователя' maxlength='36')
                             div.error.username
                         div(layout='row' layout-align='center center')
-                            md-button.md-raised.md-primary(flex type='submit') Save
+                            md-button.md-raised.md-primary(flex type='submit') Сохранить
                 .form
                     form(autocomplete='off' ng-submit='update_password()').update_password
                         md-input-container.md-block
-                            input(ng-model='form.password' type='text' placeholder='New password')
+                            input(ng-model='form.password' type='text' placeholder='Новый пароль' maxlength='100')
                             div.error.password
                         div(layout='row' layout-align='center center')
-                            md-button.md-raised.md-primary(flex type='submit') Save
+                            md-button.md-raised.md-primary(flex type='submit') Сохранить

@@ -2,13 +2,13 @@
 <md-dialog class="comment_dialog">
   <md-toolbar>
     <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
-      <h2>Comments</h2>
+      <h2>Комментарии</h2>
       <md-button class="md-icon-button" ng-click="cancel_dialog()"><i class="fa fa-close"></i></md-button>
     </div>
   </md-toolbar>
   <md-dialog-content>
     <div class="md-dialog-content">
-      <md-content layout-padding="layout-padding" style="text-align: center;" ng-show="comments.length == 0" md-colors="{color: &quot;grey&quot;}">Empty</md-content>
+      <md-content layout-padding="layout-padding" style="text-align: center;" ng-show="comments.length == 0" md-colors="{color: &quot;grey&quot;}">Нет комментариев</md-content>
       <md-list flex="flex" ng-show="comments.length &gt; 0">
         <md-list-item layout="column" layout-align="left" ng-repeat="comment in comments">
           <div class="user_info" md-colors="{color: &quot;blue&quot;}" layout="row">

@@ -11,31 +11,31 @@
         <md-list-item>
           <md-button href="/#!/people" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
             <div><i class="fa fa-users"></i></div>
-            <div>People</div>
+            <div>Люди</div>
           </md-button>
         </md-list-item>
         <md-list-item>
           <md-button href="/#!/my_photos" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
             <div><i class="fa fa-picture-o"></i></div>
-            <div>My photos</div>
+            <div>Мои фотографии</div>
           </md-button>
         </md-list-item>
         <md-list-item>
           <md-button href="/#!/settings" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
             <div><i class="fa fa-cog"></i></div>
-            <div>Settings</div>
+            <div>Настройки</div>
           </md-button>
         </md-list-item>
         <md-list-item>
           <md-button layout="row" flex="flex" layout-align="start" ng-click="deleteSession()">
             <div><i class="fa fa-sign-out"></i></div>
-            <div>Exit</div>
+            <div>Выйти</div>
           </md-button>
         </md-list-item>
         <md-list-item>
           <md-button href="/#!/about" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
             <div><i class="fa fa-question-circle"></i></div>
-            <div>About</div>
+            <div>О нас</div>
           </md-button>
         </md-list-item>
       </md-list>
@@ -49,7 +49,7 @@
       </div>
     </md-toolbar>
     <div class="container">
-      <md-content layout-padding="layout-padding">
+      <md-content class="photo" layout-padding="layout-padding">
         <div class="image"><img src="{{api_url}}/photo/content/{{photo.id}}" alt=""/></div>
         <div class="name_and_likes" layout="row" layout-align="space-between center">
           <md-button md-colors="{color: &quot;red&quot;}" ng-click="to_like(0)" ng-show="like != 0 || like == null"><i class="fa fa-thumbs-down"></i></md-button>
@@ -65,13 +65,13 @@
         <form onsummit="return false" autocomplete="off" ng-submit="write_comment()">
           <div class="comment" layout="row" ng-show="bgColor == &quot;blue&quot;">
             <md-input-container class="md-block no-error">
-              <input type="text" placeholder="Enter your comment here" md-detect-hidden="false" ng-model="form.text" maxlength="100"/>
+              <input type="text" placeholder="Введите ваш комментарий" md-detect-hidden="false" ng-model="form.text" maxlength="100"/>
             </md-input-container>
             <md-button class="md-primary md-raised" flex="flex" type="submit"><i class="fa fa-paper-plane"></i></md-button>
           </div>
           <div class="comment" layout="row" ng-show="bgColor == &quot;pink&quot;">
             <md-input-container class="md-block no-error md-accent">
-              <input type="text" placeholder="Enter your comment here" md-detect-hidden="false" ng-model="form.text" maxlength="100"/>
+              <input type="text" placeholder="Введите ваш комментарий" md-detect-hidden="false" ng-model="form.text" maxlength="100"/>
             </md-input-container>
             <md-button class="md-accent md-raised" flex="flex" type="submit"><i class="fa fa-paper-plane"></i></md-button>
           </div>

@@ -59,22 +59,24 @@ app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http
     $scope.current_user = null
 
     $scope.alert = {
-        success: (message = 'Success')->
+        success: (message = 'Успех')->
             $mdDialog.show(
                 $mdDialog.alert()
                     .clickOutsideToClose(true)
-                    .title('Success')
+                    .title('Сообщение')
                     .textContent(message)
-                    .ok('OK')
+                    .ok('ОК')
             )
-        error: (message = 'Unknow')->
+        error: (message = 'Неизвестная ошибка')->
             $mdDialog.show(
                 $mdDialog.alert()
                     .clickOutsideToClose(true)
-                    .title('Error')
+                    .title('Ошибка')
                     .textContent(message)
-                    .ok('OK')
+                    .ok('ОК')
             )
+        server_error: ->
+            $scope.alert.error('Возможно соединение с сервером не установлено.')
     }
 
     $scope.leftMenu = ->
@@ -83,7 +85,12 @@ app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http
         $http.post(api_url+'/account/current_user', { session_key: localStorage.getItem('session_key') }).then((response)->
             response = response.data
             callback(response.body)
-        , $scope.alert.error)
+        , ->
+            # $scope.alert.server_error()
+            setTimeout(->
+                $('md-block.start_page').css('display', 'flex')
+            , 500)
+        )
     
     $scope.deleteSession = ->
         $http.post(api_url+'/account/sign_out', { session_key: localStorage.getItem('session_key') }).then((response)->
@@ -94,26 +101,19 @@ app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http
             else
                 $scope.alert.error()
             return null
-        , $scope.alert.error)
+        , ->
+            $scope.alert.server_error()
+        )
 
-    if navigator.onLine == true
-        $scope.getCurrentUser((response)->
-            if response != null
-                # Is auth.
-                location.href = '/#!/people'
-                $scope.current_user = response
-            else
-                # Is not auth.
-                location.href = '/#!/login'
-        )
-    else
-        $mdDialog.show(
-            $mdDialog.alert()
-            .clickOutsideToClose(true)
-            .title('Error')
-            .textContent('No internet connection')
-            .ok('OK')
-        )
+    $scope.getCurrentUser((response)->
+        if response != null
+            # Is auth.
+            location.href = '/#!/people'
+            $scope.current_user = response
+        else
+            # Is not auth.
+            location.href = '/#!/login'
+    )
     
     $mainScope = $scope
 
@@ -126,19 +126,15 @@ app.controller 'LoginController', ($scope, $mdDialog, $http)->
         $http.post(api_url+'/account/sign_in', $scope.form).then((response)->
             response = response.data
             if response.error == 2
-                $mdDialog.show(
-                    $mdDialog.alert()
-                    .clickOutsideToClose(true)
-                    .title('Error')
-                    .textContent('Username or password is invalid')
-                    .ok('OK')
-                )
+                $mainScope.alert.error('Неверные данные!')
             else if response.error == 0
                 localStorage.setItem('session_key', response.body)
                 location.href = '/'
             else
                 $mainScope.alert.error
-        , $mainScope.alert.error)
+        , ->
+            $mainScope.alert.server_error()
+        )
 app.controller 'JoinController', ($scope, $mdDialog, $http)->
     $scope.form = {
         first_name: '',
@@ -154,8 +150,22 @@ app.controller 'JoinController', ($scope, $mdDialog, $http)->
             if response.error == 3
                 showFormErrors($('form[name="JoinForm"]'), response.body, {
                     first_name: {
-                        min: 'Required',
-                        max: 'Maximum',
+                        min: 'Введите имя'
+                    },
+                    last_name: {
+                        min: 'Введите фамилия'
+                    },
+                    gender: {
+                        invalid: 'Выберите ваш пол'
+                    },
+                    username: {
+                        min: 'Не меньше 5 символов',
+                        unique: 'Имя пользователя занят',
+                        invalid: 'Некорректные символы'
+                    },
+                    password: {
+                        min: 'Не меньше 6 символов',
+                        invalid: 'Некорректные символы'
                     }
                 })
             else
@@ -166,14 +176,18 @@ app.controller 'JoinController', ($scope, $mdDialog, $http)->
                         location.href = '/'
                     else
                         $mainScope.alert.error
-                , $mainScope.alert.error)
+                , ->
+                    $mainScope.alert.server_error()
+                )
                 
-        , $mainScope.alert.error)
+        , ->
+            $mainScope.alert.server_error()
+        )
 
 app.controller 'PeopleController', ($scope, $mdDialog)->
-    $scope.title = 'People'
+    $scope.title = 'Люди'
 app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
-    $scope.title = 'My photos'
+    $scope.title = 'Мои фотографии'
     $scope.photos = []
     $scope.uploader = new FileUploader({
         url: api_url+'/photo/upload',
@@ -187,23 +201,23 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
                 $mainScope.alert.success()
             else if response.error == 3
                 if response.body['image'].includes('invalid')
-                    $mainScope.alert.error('invalid')
+                    $mainScope.alert.error('Ошибка чтения изображения')
                 else if response.body['image'].includes('mime')
-                    $mainScope.alert.error('mime')
+                    $mainScope.alert.error('Можно загружать только JPEG, PNG или GIF форматы изображения')
                 else if response.body['image'].includes('size')
-                    $mainScope.alert.error('size')
+                    $mainScope.alert.error('Загрузите изображения не больше 5мб')
                 else if response.body['image'].includes('pixels')
-                    $mainScope.alert.error('pixels')
+                    $mainScope.alert.error('Нестандартный размер изображения')
                 else if response.body['image'].includes('count')
-                    $mainScope.alert.error('count')
+                    $mainScope.alert.error('Вы уже загрузили 20 фотографии, удалите ненужных.')
                 else
                     $mainScope.error.alert()
             else
                 $mainScope.alert.error()
             $scope.getList()
-            $('.file_select_text').text('Upload photo')
+            $('.file_select_text').text('Загрузить фото')
         onProgressItem: (item, progress)->
-            $('.file_select_text').text(progress+'%')
+            $('.file_select_text').text('Загружено: '+progress+'%')
         onError: ->
             $mainScope.alert.error()
     })
@@ -218,7 +232,9 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
             else
                 $mainScope.alert.error()
                 
-        , $mainScope.alert.error)
+        , ->
+            $mainScope.alert.server_error()
+        )
     $scope.getList()
 
     $scope.show_dialog = (photo_id)->
@@ -253,13 +269,15 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
                     $scope.getList()
                 else
                     $mainScope.alert.error
-            , $mainScope.alert.error)
+            , ->
+                $mainScope.alert.server_error()
+            )
         , ->
             # cancel callback.
         )
 
 app.controller 'SettingsController', ($scope, $http, $mdDialog)->
-    $scope.title = 'Settings'
+    $scope.title = 'Настройка'
     $scope.form = {
         session_key: localStorage.getItem('session_key')
 
@@ -287,8 +305,10 @@ app.controller 'SettingsController', ($scope, $http, $mdDialog)->
             else if response.error == 3
                 showFormErrors($('form.update'), response.body, {
                     first_name: {
-                        min: 'Required',
-                        max: 'Maximum',
+                        min: 'Введите имя'
+                    },
+                    last_name: {
+                        min: 'Введите фамилия'
                     }
                 })
             else
@@ -307,13 +327,16 @@ app.controller 'SettingsController', ($scope, $http, $mdDialog)->
             else if response.error == 3
                 showFormErrors($('form.update_username'), response.body, {
                     username: {
-                        min: 'Required',
-                        max: 'Maximum',
+                        min: 'Не меньше 5 символов',
+                        unique: 'Имя пользователя занят',
+                        invalid: 'Некорректные символы'
                     }
                 })
             else
                 $mainScope.alert.error()
-        , $mainScope.alert.error)
+        , ->
+            $mainScope.alert.server_error()
+        )
 
     $scope.update_password = ->
         $http.post(api_url+'/account/update/password', $scope.form).then((response)->
@@ -327,36 +350,40 @@ app.controller 'SettingsController', ($scope, $http, $mdDialog)->
             else if response.error == 3
                 showFormErrors($('form.update_password'), response.body, {
                     password: {
-                        min: 'Required',
-                        max: 'Maximum',
+                        min: 'Не меньше 6 символов',
+                        invalid: 'Некорректные символы'
                     }
                 })
             else
                 $mainScope.alert.error()
-        , $mainScope.alert.error)
+        , ->
+            $mainScope.alert.server_error()
+        )
 
 app.controller 'AboutController', ($scope, $mdDialog)->
-    $scope.title = 'About'
+    $scope.title = 'О нас'
 
 app.controller 'PhotoController', ($scope, $mdDialog, $http, $routeParams)->
-    $scope.title = 'Gentlemen'
+    $scope.title = 'Джентлмены'
     $scope.bgColor = 'blue'
     $scope.form = {
         text: ''
     }
     
     if $routeParams['gender'] == "0"
-        $scope.title = 'Lady'
+        $scope.title = 'Леди'
         $scope.bgColor = 'pink'
 
     $scope.like = null
     $scope.get = ->
         $http.get(api_url+'/photo/get?gender='+$routeParams['gender']+'&session_key='+localStorage.getItem('session_key')).then((response)->
             response = response.data
-            console.log response
             if response.error == 0
                 $scope.photo = response.body
                 $scope.like = $scope.photo.like
+
+                $('md-content.photo').hide()
+                $('md-content.photo').fadeIn(300)
 
                 # View image.
                 $http.post(api_url+'/photo/to_view', { photo_id: $scope.photo.id, session_key: localStorage.getItem('session_key') }).then((response)->
@@ -374,7 +401,7 @@ app.controller 'PhotoController', ($scope, $mdDialog, $http, $routeParams)->
                 location.href = '/'
             else if response.error == 4
                 # photos not found.
-                $mainScope.alert.error('Photo not found')
+                $mainScope.alert.error('Еще не фотографии')
                 location.href = '/#!/people'
             else
                 $mainScope.alert.error()
@@ -387,15 +414,15 @@ app.controller 'PhotoController', ($scope, $mdDialog, $http, $routeParams)->
             response = response.data
             if response.error == 0
                 $scope.form.text = ''
-                $mainScope.alert.success('Success')
+                $mainScope.alert.success('Успешно написано!')
             else if response.error == 3
                 try
                     response.body['text']['min']
-                    $mainScope.alert.error('Min')
+                    $mainScope.alert.error('Введите ваш комментарий')
                 catch
                 try
                     response.body['comment']['count']
-                    $mainScope.alert.error('Limit')
+                    $mainScope.alert.error('В последнее время вы написали много комментариев, попробуйте позже.')
                 catch
             else
                 $mainScope.alert.error()

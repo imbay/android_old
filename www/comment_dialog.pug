@@ -1,12 +1,12 @@
 md-dialog.comment_dialog
     md-toolbar
         div.md-toolbar-tools(layout='row' layout-align='space-between center')
-            h2 Comments
+            h2 Комментарии
             md-button.md-icon-button(ng-click='cancel_dialog()')
                 i.fa.fa-close
     md-dialog-content
         div.md-dialog-content
-            md-content(layout-padding style='text-align: center' ng-show='comments.length == 0' md-colors='{color: "grey"}') Empty
+            md-content(layout-padding style='text-align: center' ng-show='comments.length == 0' md-colors='{color: "grey"}') Нет комментариев
             md-list(flex ng-show='comments.length > 0')
                 md-list-item(layout='column' layout-align='left' ng-repeat='comment in comments')
                     .user_info(md-colors='{color: "blue"}' layout='row')

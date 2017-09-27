@@ -2,7 +2,7 @@
 <div ng-controller="JoinController">
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <md-button class="md-icon-button" href="/#!/login" aria-label="Settings"><i class="fa fa-chevron-left"></i></md-button><span>Registration</span>
+      <md-button class="md-icon-button" href="/#!/login" aria-label="Settings"><i class="fa fa-chevron-left"></i></md-button><span>Регистрация</span>
     </div>
   </md-toolbar>
   <div class="container">
@@ -10,35 +10,35 @@
       <div class="form">
         <form autocomplete="off" name="JoinForm">
           <md-input-container class="md-block">
-            <input ng-model="form.first_name" type="text" placeholder="First name"/>
+            <input ng-model="form.first_name" type="text" placeholder="Имя" maxlength="15"/>
             <div class="error first_name"></div>
           </md-input-container>
           <md-input-container class="md-block">
-            <input ng-model="form.last_name" type="text" placeholder="Last name"/>
+            <input ng-model="form.last_name" type="text" placeholder="Фамилия"/>
             <div class="error last_name"></div>
           </md-input-container>
           <md-input-container class="md-block">
             <md-radio-group ng-model="form.gender">
-              <md-radio-button class="md-primary" value="1">Male</md-radio-button>
-              <md-radio-button class="md-primary" value="0">Female</md-radio-button>
+              <md-radio-button class="md-primary" value="1">Парень</md-radio-button>
+              <md-radio-button class="md-primary" value="0">Девушка</md-radio-button>
             </md-radio-group>
             <div class="error gender no-margin-top"></div>
           </md-input-container>
           <md-input-container class="md-block">
-            <input ng-model="form.username" type="text" placeholder="Username"/>
+            <input ng-model="form.username" type="text" placeholder="Имя пользователя"/>
             <div class="error username"></div>
           </md-input-container>
           <md-input-container class="md-block">
-            <input ng-model="form.password" type="text" placeholder="Password"/>
+            <input ng-model="form.password" type="text" placeholder="Пароль"/>
             <div class="error password"></div>
           </md-input-container>
           <div layout="row" layout-align="center center">
-            <md-button class="md-raised md-primary" flex="flex" ng-click="submit()">Join</md-button>
+            <md-button class="md-raised md-primary" flex="flex" ng-click="submit()">Зарегистрироваться</md-button>
           </div>
         </form>
       </div>
       <div class="links" layout="column">
-        <md-button href="/#!/login">Log in</md-button>
+        <md-button href="/#!/login">Войти</md-button>
       </div>
     </div>
   </div>

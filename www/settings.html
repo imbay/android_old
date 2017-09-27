@@ -11,31 +11,31 @@
         <md-list-item>
           <md-button href="/#!/people" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
             <div><i class="fa fa-users"></i></div>
-            <div>People</div>
+            <div>Люди</div>
           </md-button>
         </md-list-item>
         <md-list-item>
           <md-button href="/#!/my_photos" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
             <div><i class="fa fa-picture-o"></i></div>
-            <div>My photos</div>
+            <div>Мои фотографии</div>
           </md-button>
         </md-list-item>
         <md-list-item>
           <md-button href="/#!/settings" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
             <div><i class="fa fa-cog"></i></div>
-            <div>Settings</div>
+            <div>Настройки</div>
           </md-button>
         </md-list-item>
         <md-list-item>
           <md-button layout="row" flex="flex" layout-align="start" ng-click="deleteSession()">
             <div><i class="fa fa-sign-out"></i></div>
-            <div>Exit</div>
+            <div>Выйти</div>
           </md-button>
         </md-list-item>
         <md-list-item>
           <md-button href="/#!/about" layout="row" flex="flex" layout-align="start" ng-click="leftMenu()">
             <div><i class="fa fa-question-circle"></i></div>
-            <div>About</div>
+            <div>О нас</div>
           </md-button>
         </md-list-item>
       </md-list>
@@ -52,44 +52,44 @@
         <div class="form">
           <form class="update" autocomplete="off" ng-submit="update()">
             <md-input-container class="md-block">
-              <input ng-model="form.first_name" type="text" placeholder="First name"/>
+              <input ng-model="form.first_name" type="text" placeholder="Имя" maxlength="15"/>
               <div class="error first_name"></div>
             </md-input-container>
             <md-input-container class="md-block">
-              <input ng-model="form.last_name" type="text" placeholder="Last name"/>
+              <input ng-model="form.last_name" type="text" placeholder="Фамилия" maxlength="15"/>
               <div class="error last_name"></div>
             </md-input-container>
             <md-input-container class="md-block">
               <md-radio-group ng-model="form.gender">
-                <md-radio-button class="md-primary" value="1">Male</md-radio-button>
-                <md-radio-button class="md-primary" value="0">Female</md-radio-button>
+                <md-radio-button class="md-primary" value="1">Парень</md-radio-button>
+                <md-radio-button class="md-primary" value="0">Девушка</md-radio-button>
               </md-radio-group>
               <div class="error gender no-margin-top"></div>
             </md-input-container>
             <div layout="row" layout-align="center center">
-              <md-button class="md-raised md-primary" flex="flex" type="submit">Save</md-button>
+              <md-button class="md-raised md-primary" flex="flex" type="submit">Сохранить</md-button>
             </div>
           </form>
         </div>
         <div class="form">
           <form class="update_username" autocomplete="off" ng-submit="update_username()">
             <md-input-container class="md-block">
-              <input ng-model="form.username" type="text" placeholder="Username"/>
+              <input ng-model="form.username" type="text" placeholder="Имя пользователя" maxlength="36"/>
               <div class="error username"></div>
             </md-input-container>
             <div layout="row" layout-align="center center">
-              <md-button class="md-raised md-primary" flex="flex" type="submit">Save</md-button>
+              <md-button class="md-raised md-primary" flex="flex" type="submit">Сохранить</md-button>
             </div>
           </form>
         </div>
         <div class="form">
           <form class="update_password" autocomplete="off" ng-submit="update_password()">
             <md-input-container class="md-block">
-              <input ng-model="form.password" type="text" placeholder="New password"/>
+              <input ng-model="form.password" type="text" placeholder="Новый пароль" maxlength="100"/>
               <div class="error password"></div>
             </md-input-container>
             <div layout="row" layout-align="center center">
-              <md-button class="md-raised md-primary" flex="flex" type="submit">Save</md-button>
+              <md-button class="md-raised md-primary" flex="flex" type="submit">Сохранить</md-button>
             </div>
           </form>
         </div>

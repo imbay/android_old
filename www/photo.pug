@@ -9,7 +9,7 @@ div(ng-controller='PhotoController' layout='column' ng-cloak)
                 md-button(aria-label='Next').md-icon-button(ng-click='get()')
                     i.fa.fa-arrow-right
         .container
-            md-content(layout-padding)
+            md-content(layout-padding).photo
                 .image
                     img(src='{{api_url}}/photo/content/{{photo.id}}' alt='')
                 .name_and_likes(layout='row' layout-align='space-between center')
@@ -28,11 +28,11 @@ div(ng-controller='PhotoController' layout='column' ng-cloak)
                 form(onsummit='return false' autocomplete='off' ng-submit='write_comment()')
                     .comment(layout='row' ng-show='bgColor == "blue"')
                         md-input-container.md-block.no-error
-                            input(type='text' placeholder='Enter your comment here' md-detect-hidden='false' ng-model='form.text' maxlength='100')
+                            input(type='text' placeholder='Введите ваш комментарий' md-detect-hidden='false' ng-model='form.text' maxlength='100')
                         md-button(flex type='submit').md-primary.md-raised
                             i.fa.fa-paper-plane
                     .comment(layout='row' ng-show='bgColor == "pink"')
                         md-input-container.md-block.no-error.md-accent
-                            input(type='text' placeholder='Enter your comment here' md-detect-hidden='false' ng-model='form.text' maxlength='100')
+                            input(type='text' placeholder='Введите ваш комментарий' md-detect-hidden='false' ng-model='form.text' maxlength='100')
                         md-button(flex type='submit').md-accent.md-raised
                             i.fa.fa-paper-plane

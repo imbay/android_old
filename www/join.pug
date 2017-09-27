@@ -3,29 +3,29 @@ div(ng-controller='JoinController')
         div.md-toolbar-tools
             md-button(href='/#!/login' aria-label='Settings').md-icon-button
                 i.fa.fa-chevron-left
-            span Registration
+            span Регистрация
     .container
         div(layout='column' layout-padding ng-cloak)
             .form
                 form(autocomplete='off' name='JoinForm')
                     md-input-container.md-block
-                        input(ng-model='form.first_name' type='text' placeholder='First name')
+                        input(ng-model='form.first_name' type='text' placeholder='Имя' maxlength='15')
                         div.error.first_name
                     md-input-container.md-block
-                        input(ng-model='form.last_name' type='text' placeholder='Last name')
+                        input(ng-model='form.last_name' type='text' placeholder='Фамилия')
                         div.error.last_name
                     md-input-container.md-block
                         md-radio-group(ng-model='form.gender')
-                            md-radio-button(value='1').md-primary Male
-                            md-radio-button(value='0').md-primary Female
+                            md-radio-button(value='1').md-primary Парень
+                            md-radio-button(value='0').md-primary Девушка
                         div.error.gender.no-margin-top
                     md-input-container.md-block
-                        input(ng-model='form.username' type='text' placeholder='Username')
+                        input(ng-model='form.username' type='text' placeholder='Имя пользователя')
                         div.error.username
                     md-input-container.md-block
-                        input(ng-model='form.password' type='text' placeholder='Password')
+                        input(ng-model='form.password' type='text' placeholder='Пароль')
                         div.error.password
                     div(layout='row' layout-align='center center')
-                        md-button.md-raised.md-primary(flex ng-click='submit()') Join
+                        md-button.md-raised.md-primary(flex ng-click='submit()') Зарегистрироваться
             .links(layout='column')
-                md-button(href='/#!/login') Log in
+                md-button(href='/#!/login') Войти

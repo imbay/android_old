@@ -8,10 +8,10 @@ div(ng-controller='MyPhotosController' layout='column' ng-cloak)
                 md-button.md-raised(md-colors='{backgroundColor: "green"}' flex)
                     label(for='file-input')
                         i.fa.fa-cloud-upload.left
-                        span.file_select_text Upload photo
+                        span.file_select_text Загрузить фото
                 input(type='file' nv-file-select uploader='uploader' accept='image/*')#file-input.ng-hide
     md-list(flex)
-        md-content(layout-padding style='text-align: center' ng-show='photos.length == 0' md-colors='{color: "grey"}') Empty
+        md-content(layout-padding style='text-align: center' ng-show='photos.length == 0' md-colors='{color: "grey"}') Нет фотографии
         md-list-item(layout='row' ng-repeat='photo in photos')
             md-content(flex)
                 .img

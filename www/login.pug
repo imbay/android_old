@@ -5,10 +5,10 @@ div(ng-controller='LoginController' md-colors='{backgroundColor: "blue"}')
         .form
             form(onsubmit='return false' autocomplete='off' ng-submit='submit()')
                 md-input-container.md-block
-                    input(ng-model='form.username' type='text' placeholder='Username')
+                    input(ng-model='form.username' type='text' placeholder='Имя пользователя' maxlength='36')
                 md-input-container.md-block
-                    input(ng-model='form.password' type='password' placeholder='Password')
+                    input(ng-model='form.password' type='password' placeholder='Пароль' maxlength='100')
                 div(layout='row' layout-align='center center')
-                    md-button.md-raised.md-primary(flex type='submit') Log in
+                    md-button.md-raised.md-primary(flex type='submit') Войти
         .links(layout='column')
-            md-button(href='/#!/join') Registration
+            md-button(href='/#!/join') Регистрация
