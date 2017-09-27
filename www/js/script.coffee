@@ -200,8 +200,6 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
             if response.error == 0
                 # read comments.
                 $http.post(api_url+'/photo/read_comments', { photo_id: photo_id, session_key: localStorage.getItem('session_key') })
-
-                console.log response.body
                 $mdDialog.show({
                     templateUrl: 'comment_dialog.html',
                     parent: angular.element(document.body),
@@ -222,8 +220,7 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
 
     $scope.remove = (photo_id)->
         $mdDialog.show(remove_confirm).then(->
-            $http.post(api_url+'/
-            photo/delete', { photo_id: photo_id, session_key: localStorage.getItem('session_key') }).then((response)->
+            $http.post(api_url+'/photo/delete', { photo_id: photo_id, session_key: localStorage.getItem('session_key') }).then((response)->
                 response = response.data
                 if response.error == 0
                     $scope.getList()
@@ -244,24 +241,24 @@ app.controller 'GentlemenController', ($scope, $mdDialog, $http)->
     $scope.form = {
         text: ''
     }
+    $scope.like = null
     $http.get(api_url+'/photo/get?gender=1&session_key='+localStorage.getItem('session_key')).then((response)->
         response = response.data
         if response.error == 0
             $scope.photo = response.body
-            console.log $scope.photo.like
+            $scope.like = $scope.photo.like
 
             # View image.
             $http.post(api_url+'/photo/to_view', { photo_id: $scope.photo.id, session_key: localStorage.getItem('session_key') }).then((response)->
                 response = response.data
-                console.log response
             , $mainScope.UnknowErrorAlert)
 
-            setTimeout(->
-                $http.post(api_url+'/photo/to_like', { photo_id: $scope.photo.id, up: 1, session_key: localStorage.getItem('session_key') }).then((response)->
+            $scope.to_like = (like)->
+                $http.post(api_url+'/photo/to_like', { photo_id: $scope.photo.id, up: like, session_key: localStorage.getItem('session_key') }).then((response)->
                     response = response.data
-                    console.log response
+                    if response.error == 0
+                        $scope.like = like
                 , $mainScope.UnknowErrorAlert)
-            , 1000)
 
         else if response.error == 2
             location.href = '/'

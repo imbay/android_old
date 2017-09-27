@@ -13,12 +13,16 @@ div(ng-controller='GentlemenController' layout='column' ng-cloak)
                 .image
                     img(src='{{api_url}}/photo/content/{{photo.id}}' alt='')
                 .name_and_likes(layout='row')
-                    md-button(md-colors='{color: "red"}' flex)
+                    md-button(md-colors='{color: "red"}' flex ng-click='to_like(0)' ng-show='like != 0 || like == null')
+                        i.fa.fa-thumbs-down
+                    md-button(md-colors='{backgroundColor: "red"}' flex ng-show='like == 0')
                         i.fa.fa-thumbs-down
                     .name(layout='column')
                         .full_name(md-colors='{color: "blue"}') {{photo.first_name}} {{photo.last_name}}
                         .username @{{photo.username}}
-                    md-button(md-colors='{color: "green"}' flex)
+                    md-button(md-colors='{color: "green"}' flex ng-click='to_like(1)' ng-show='like != 1 || like == null')
+                        i.fa.fa-thumbs-up
+                    md-button(md-colors='{backgroundColor: "green"}' flex ng-show='like == 1')
                         i.fa.fa-thumbs-up
                 // md-divider
                 form(onsummit='return false' autocomplete='off' ng-submit='write_comment()')
