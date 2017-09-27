@@ -353,6 +353,7 @@ app.controller 'PhotoController', ($scope, $mdDialog, $http, $routeParams)->
     $scope.get = ->
         $http.get(api_url+'/photo/get?gender='+$routeParams['gender']+'&session_key='+localStorage.getItem('session_key')).then((response)->
             response = response.data
+            console.log response
             if response.error == 0
                 $scope.photo = response.body
                 $scope.like = $scope.photo.like
