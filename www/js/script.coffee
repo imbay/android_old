@@ -69,13 +69,13 @@ app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http
             .ok('OK')
         )
     $scope.getCurrentUser = (callback)->
-        $http.post(api_url+'account/current_user', { session_key: localStorage.getItem('session_key') }).then((response)->
+        $http.post(api_url+'/account/current_user', { session_key: localStorage.getItem('session_key') }).then((response)->
             response = response.data
             callback(response.body)
         , $scope.UnknowErrorAlert)
     
     $scope.deleteSession = ->
-        $http.post(api_url+'account/sign_out', { session_key: localStorage.getItem('session_key') }).then((response)->
+        $http.post(api_url+'/account/sign_out', { session_key: localStorage.getItem('session_key') }).then((response)->
             response = response.data
             if response.error == 0
                 localStorage.setItem('session_key', null)
@@ -112,7 +112,7 @@ app.controller 'LoginController', ($scope, $mdDialog, $http)->
         password: ''
     }
     $scope.submit = ->
-        $http.post(api_url+'account/sign_in', $scope.form).then((response)->
+        $http.post(api_url+'/account/sign_in', $scope.form).then((response)->
             response = response.data
             if response.error == 2
                 $mdDialog.show(
@@ -138,7 +138,7 @@ app.controller 'JoinController', ($scope, $mdDialog, $http)->
         language: systemLanguage
     }
     $scope.submit = ->
-        $http.post(api_url+'account/sign_up', $scope.form).then((response)->
+        $http.post(api_url+'/account/sign_up', $scope.form).then((response)->
             response = response.data
             if response.error == 3
                 showFormErrors($('form[name="JoinForm"]'), response.body, {
@@ -148,7 +148,7 @@ app.controller 'JoinController', ($scope, $mdDialog, $http)->
                     }
                 })
             else
-                $http.post(api_url+'account/sign_in', { username: $scope.form.username, password: $scope.form.password }).then((response)->
+                $http.post(api_url+'/account/sign_in', { username: $scope.form.username, password: $scope.form.password }).then((response)->
                     response = response.data
                     if response.error == 0
                         localStorage.setItem('session_key', response.body)
@@ -198,6 +198,9 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
         $http.get(api_url+'photo/comments?photo_id='+photo_id+'&session_key='+localStorage.getItem('session_key')).then((response)->
             response = response.data
             if response.error == 0
+                # read comments.
+                $http.post(api_url+'/photo/read_comments', { photo_id: photo_id, session_key: localStorage.getItem('session_key') })
+
                 console.log response.body
                 $mdDialog.show({
                     templateUrl: 'comment_dialog.html',
@@ -219,7 +222,8 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
 
     $scope.remove = (photo_id)->
         $mdDialog.show(remove_confirm).then(->
-            $http.post(api_url+'photo/delete', { photo_id: photo_id, session_key: localStorage.getItem('session_key') }).then((response)->
+            $http.post(api_url+'/
+            photo/delete', { photo_id: photo_id, session_key: localStorage.getItem('session_key') }).then((response)->
                 response = response.data
                 if response.error == 0
                     $scope.getList()
@@ -244,6 +248,7 @@ app.controller 'GentlemenController', ($scope, $mdDialog, $http)->
         response = response.data
         if response.error == 0
             $scope.photo = response.body
+            console.log $scope.photo.like
 
             # View image.
             $http.post(api_url+'/photo/to_view', { photo_id: $scope.photo.id, session_key: localStorage.getItem('session_key') }).then((response)->
@@ -251,10 +256,12 @@ app.controller 'GentlemenController', ($scope, $mdDialog, $http)->
                 console.log response
             , $mainScope.UnknowErrorAlert)
 
-            $http.post(api_url+'/photo/to_like', { photo_id: $scope.photo.id, up: 1, session_key: localStorage.getItem('session_key') }).then((response)->
-                response = response.data
-                console.log response
-            , $mainScope.UnknowErrorAlert)
+            setTimeout(->
+                $http.post(api_url+'/photo/to_like', { photo_id: $scope.photo.id, up: 1, session_key: localStorage.getItem('session_key') }).then((response)->
+                    response = response.data
+                    console.log response
+                , $mainScope.UnknowErrorAlert)
+            , 1000)
 
         else if response.error == 2
             location.href = '/'
@@ -273,7 +280,7 @@ app.controller 'GentlemenController', ($scope, $mdDialog, $http)->
             
     , $mainScope.UnknowErrorAlert)
     $scope.write_comment = ->
-        $http.post(api_url+'/photo/write_comment', { photo_id: 1, text: $scope.form.text, session_key: localStorage.getItem('session_key') }).then((response)->
+        $http.post(api_url+'/photo/write_comment', { photo_id: $scope.photo.id, text: $scope.form.text, session_key: localStorage.getItem('session_key') }).then((response)->
             response = response.data
             console.log response
         , $mainScope.UnknowErrorAlert)

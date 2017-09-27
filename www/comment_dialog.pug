@@ -7,13 +7,13 @@ md-dialog.comment_dialog
     md-dialog-content
         div.md-dialog-content
             md-content(layout-padding layout-align='center' ng-show='comments == 0' md-colors='{color: "grey"}') Empty
-            md-list(flex ng-show='comments > 0')
+            md-list(flex ng-show='comments.length > 0')
                 md-list-item(layout='column' layout-align='left' ng-repeat='comment in comments')
                     .user_info(md-colors='{color: "blue"}' layout='row')
                         .photo
                             img(src='img/no_photo.png' alt='')
                         .name(layout='column')
-                            span.full_name Nurasyl Aldan
-                            span.username @nurasyl
+                            span.full_name {{ comment.first_name }} {{ comment.last_name }}
+                            span.username @{{comment.username}}
                     .comment(md-colors='{color: "grey"}') {{ comment.text }}
                     md-divider
