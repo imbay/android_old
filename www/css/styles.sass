@@ -222,12 +222,29 @@ md-dialog.comment_dialog
     md-list-item
         border: 1px 0 1px 0 solid $color2
         padding: 5px
+        padding-left: 25px
+        padding-right: 25px
         margin-bottom: 5px
         &::before
             content: none
         div.comment
             font-size: 12px
-            margin-top: 5px
+            padding: 3px
+            text-align: left
+        div.user_info
+            .photo
+                margin-left: 3px
+                img
+                    border-radius: 100%
+                    border: 1px solid $color2
+                    padding: 3px
+                    width: 50px
+            .name
+                margin-left: 7px
+                margin-top: 7px
+                .username
+                    color: gray
+                    font-size: 14px
 
 i.fa
     $px: 7px
@@ -237,3 +254,6 @@ i.fa
     &.right
         margin-right: $px
         margin-left: $px
+
+.text
+    word-wrap: break-word

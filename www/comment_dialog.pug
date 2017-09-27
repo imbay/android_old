@@ -2,11 +2,18 @@ md-dialog.comment_dialog
     md-toolbar
         div.md-toolbar-tools(layout='row' layout-align='space-between center')
             h2 Comments
-            md-button.md-icon-button
+            md-button.md-icon-button(ng-click='cancel_dialog()')
                 i.fa.fa-close
     md-dialog-content
         div.md-dialog-content
-            md-list(flex)
-                md-list-item(layout='column')
-                    .name(md-colors='{color: "blue"}') Nurasyl Aldan
-                    .comment(md-colors='{color: "grey"}') Beautyful
+            md-content(layout-padding layout-align='center' ng-show='comments == 0' md-colors='{color: "grey"}') Empty
+            md-list(flex ng-show='comments > 0')
+                md-list-item(layout='column' layout-align='left' ng-repeat='comment in comments')
+                    .user_info(md-colors='{color: "blue"}' layout='row')
+                        .photo
+                            img(src='img/no_photo.png' alt='')
+                        .name(layout='column')
+                            span.full_name Nurasyl Aldan
+                            span.username @nurasyl
+                    .comment(md-colors='{color: "grey"}') {{ comment.text }}
+                    md-divider

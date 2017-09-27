@@ -50,23 +50,24 @@
     </md-toolbar>
     <div class="container">
       <md-content layout-padding="layout-padding">
-        <div class="image"><img src="img/man.jpg" alt=""/></div>
+        <div class="image"><img src="{{api_url}}/photo/content/{{photo.id}}" alt=""/></div>
         <div class="name_and_likes" layout="row">
           <md-button md-colors="{color: &quot;red&quot;}" flex="flex"><i class="fa fa-thumbs-down"></i></md-button>
           <div class="name" layout="column">
-            <div class="full_name" md-colors="{color: &quot;blue&quot;}">Nurasyl Aldan</div>
-            <div class="username">@nurasyl</div>
+            <div class="full_name" md-colors="{color: &quot;blue&quot;}">{{photo.first_name}} {{photo.last_name}}</div>
+            <div class="username">@{{photo.username}}</div>
           </div>
           <md-button md-colors="{color: &quot;green&quot;}" flex="flex"><i class="fa fa-thumbs-up"></i></md-button>
         </div>
         <!-- md-divider-->
-        <form onsummit="return false" autocomplete="off"></form>
-        <div class="comment" layout="row">
-          <md-input-container class="md-block no-error">
-            <input type="text" placeholder="Enter your comment here" md-detect-hidden="false" ng-model="form.comment" maxlength="100"/>
-          </md-input-container>
-          <md-button class="md-primary md-raised" flex="flex"><i class="fa fa-paper-plane"></i></md-button>
-        </div>
+        <form onsummit="return false" autocomplete="off" ng-submit="write_comment()">
+          <div class="comment" layout="row">
+            <md-input-container class="md-block no-error">
+              <input type="text" placeholder="Enter your comment here" md-detect-hidden="false" ng-model="form.text" maxlength="100"/>
+            </md-input-container>
+            <md-button class="md-primary md-raised" flex="flex" type="submit"><i class="fa fa-paper-plane"></i></md-button>
+          </div>
+        </form>
       </md-content>
     </div>
   </md-content>

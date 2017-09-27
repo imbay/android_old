@@ -25,10 +25,10 @@ div(ng-controller='MyPhotosController' layout='column' ng-cloak)
                     md-button(flex md-colors='{color: "red"}')
                         i.fa.fa-thumbs-down
                         span {{photo.dislikes}}
-                    md-button(flex md-colors='{color: "grey"}' ng-hide='photo.new_comments != 0')
+                    md-button(flex md-colors='{color: "grey"}' ng-hide='photo.new_comments != 0' ng-click='show_dialog(photo.id)')
                         i.fa.fa-comment
                         span {{photo.comments}}
-                    md-button(flex md-colors='{color: "red"}' ng-hide='photo.new_comments == 0')
+                    md-button(flex md-colors='{color: "red"}' ng-hide='photo.new_comments == 0' ng-click='show_dialog(photo.id)')
                         i.fa.fa-comment
                         span {{photo.new_comments}}
         md-divider

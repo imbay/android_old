@@ -182,14 +182,24 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
                 
         , $mainScope.UnknowErrorAlert)
     $scope.getList()
-        
-    ###
-    $mdDialog.show({
-        templateUrl: 'comment_dialog.html',
-        parent: angular.element(document.body),
-        clickOutsideToClose: true
-    })
-    ###
+
+    $scope.show_dialog = (photo_id)->
+        $http.get(api_url+'photo/comments?photo_id='+photo_id+'&session_key='+localStorage.getItem('session_key')).then((response)->
+            response = response.data
+            if response.error == 0
+                console.log response.body
+                $mdDialog.show({
+                    templateUrl: 'comment_dialog.html',
+                    parent: angular.element(document.body),
+                    controller: ($scope, $mdDialog)->
+                        $scope.comments = response.body
+                        $scope.cancel_dialog = ->
+                            $mdDialog.cancel()
+                })
+            else
+                $mainScope.UnknowErrorAlert()
+        , $mainScope.UnknowErrorAlert)
+
 app.controller 'SettingsController', ($scope, $mdDialog)->
     $scope.title = 'Settings'
 app.controller 'AboutController', ($scope, $mdDialog)->
@@ -197,19 +207,34 @@ app.controller 'AboutController', ($scope, $mdDialog)->
 
 app.controller 'GentlemenController', ($scope, $mdDialog, $http)->
     $scope.title = 'Gentlemen'
+    $scope.form = {
+        text: ''
+    }
     $http.get(api_url+'/photo/get?gender=1&session_key='+localStorage.getItem('session_key')).then((response)->
         response = response.data
         if response.error == 0
-            console.log response.body
+            $scope.photo = response.body
+
+            # View image.
+            $http.post(api_url+'/photo/to_view', { photo_id: $scope.photo.id, session_key: localStorage.getItem('session_key') }).then((response)->
+                response = response.data
+                console.log response
+            , $mainScope.UnknowErrorAlert)
+
+            $http.post(api_url+'/photo/to_like', { photo_id: $scope.photo.id, up: 1, session_key: localStorage.getItem('session_key') }).then((response)->
+                response = response.data
+                console.log response
+            , $mainScope.UnknowErrorAlert)
+
         else if response.error == 2
             location.href = '/'
         else if response.error == 4
-            # not found.
+            # photos not found.
             $mdDialog.show(
                 $mdDialog.alert()
                 .clickOutsideToClose(true)
                 .title('Error')
-                .textContent('Users not found')
+                .textContent('Photos not found')
                 .ok('OK')
             )
             location.href = '/#!/people'
@@ -217,6 +242,11 @@ app.controller 'GentlemenController', ($scope, $mdDialog, $http)->
             $mainScope.UnknowErrorAlert()
             
     , $mainScope.UnknowErrorAlert)
+    $scope.write_comment = ->
+        $http.post(api_url+'/photo/write_comment', { photo_id: 1, text: $scope.form.text, session_key: localStorage.getItem('session_key') }).then((response)->
+            response = response.data
+            console.log response
+        , $mainScope.UnknowErrorAlert)
 app.controller 'LadyController', ($scope, $mdDialog)->
     $scope.title = 'Lady'
     $scope.bgColor = 'pink'

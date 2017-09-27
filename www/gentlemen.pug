@@ -11,19 +11,19 @@ div(ng-controller='GentlemenController' layout='column' ng-cloak)
         .container
             md-content(layout-padding)
                 .image
-                    img(src='img/man.jpg' alt='')
+                    img(src='{{api_url}}/photo/content/{{photo.id}}' alt='')
                 .name_and_likes(layout='row')
                     md-button(md-colors='{color: "red"}' flex)
                         i.fa.fa-thumbs-down
                     .name(layout='column')
-                        .full_name(md-colors='{color: "blue"}') Nurasyl Aldan
-                        .username @nurasyl
+                        .full_name(md-colors='{color: "blue"}') {{photo.first_name}} {{photo.last_name}}
+                        .username @{{photo.username}}
                     md-button(md-colors='{color: "green"}' flex)
                         i.fa.fa-thumbs-up
                 // md-divider
-                form(onsummit='return false' autocomplete='off')
-                .comment(layout='row')
-                    md-input-container.md-block.no-error
-                        input(type='text' placeholder='Enter your comment here' md-detect-hidden='false' ng-model='form.comment' maxlength='100')
-                    md-button(flex).md-primary.md-raised
-                        i.fa.fa-paper-plane
+                form(onsummit='return false' autocomplete='off' ng-submit='write_comment()')
+                    .comment(layout='row')
+                        md-input-container.md-block.no-error
+                            input(type='text' placeholder='Enter your comment here' md-detect-hidden='false' ng-model='form.text' maxlength='100')
+                        md-button(flex type='submit').md-primary.md-raised
+                            i.fa.fa-paper-plane
