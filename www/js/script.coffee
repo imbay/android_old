@@ -1,4 +1,4 @@
-api_url = 'http://178.57.222.100:3000/api/v1/'
+api_url = 'http://localhost:3000/api/v1/'
 systemLanguage = navigator.language.substr(0,2)
 
 showFormErrors = (formElement, server_errors, errors_normalizer)->
@@ -110,6 +110,11 @@ app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http
             # Is auth.
             location.href = 'index.html#!/people'
             $scope.current_user = response
+
+            if $scope.current_user.first_name_en == 'Gaukhar' && $scope.current_user.last_name_en == 'Abylkasymova'
+                $scope.alert.success('Я люблю тебя, очень сильно! :)')
+            else if $scope.current_user.first_name_en == 'Nazira' && $scope.current_user.last_name_en == 'Abdramanova'
+                $scope.alert.success('Я люблю твою подружку, очень сильно! :)')
         else
             # Is not auth.
             location.href = 'index.html#!/login'
@@ -198,7 +203,7 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
         formData: ['session_key': localStorage.getItem('session_key')],
         onSuccessItem: (item, response)->
             if response.error == 0
-                $mainScope.alert.success()
+                $mainScope.alert.success('Успешно загружено!')
             else if response.error == 3
                 if response.body['image'].includes('invalid')
                     $mainScope.alert.error('Ошибка чтения изображения')
@@ -209,7 +214,7 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
                 else if response.body['image'].includes('pixels')
                     $mainScope.alert.error('Нестандартный размер изображения')
                 else if response.body['image'].includes('count')
-                    $mainScope.alert.error('Вы уже загрузили 20 фотографии, удалите ненужных.')
+                    $mainScope.alert.error('Вы уже загрузили 100 фотографий, удалите ненужных.')
                 else
                     $mainScope.error.alert()
             else
@@ -256,10 +261,10 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
         , $mainScope.alert.error)
     
     remove_confirm = $mdDialog.confirm()
-                        .title('?')
-                        .textContent('All remove')
-                        .ok('Yes')
-                        .cancel('No')
+                        .title('Вы уверены?')
+                        .textContent('Будуд удалены все лайки, комментарии.')
+                        .ok('Да')
+                        .cancel('Нет')
 
     $scope.remove = (photo_id)->
         $mdDialog.show(remove_confirm).then(->
@@ -292,7 +297,7 @@ app.controller 'SettingsController', ($scope, $http, $mdDialog)->
         $http.post(api_url+'/account/update', $scope.form).then((response)->
             response = response.data
             if response.error == 0
-                $mainScope.alert.success()
+                $mainScope.alert.success('Успешно сохранено!')
                 $scope.form.first_name = response.body.first_name
                 $scope.form.last_name = response.body.last_name
                 $scope.form.gender = response.body.gender
@@ -319,7 +324,7 @@ app.controller 'SettingsController', ($scope, $http, $mdDialog)->
         $http.post(api_url+'/account/update/username', $scope.form).then((response)->
             response = response.data
             if response.error == 0
-                $mainScope.alert.success()
+                $mainScope.alert.success('Успешно сохранено!')
                 $scope.form.username = response.body.username
                 $mainScope.current_user.username = response.body.username
 
@@ -342,10 +347,13 @@ app.controller 'SettingsController', ($scope, $http, $mdDialog)->
         $http.post(api_url+'/account/update/password', $scope.form).then((response)->
             response = response.data
             if response.error == 0
-                $mainScope.alert.success()
+                $mainScope.alert.success('Успешно сохранено!')
                 $scope.form.password = ''
                 $mainScope.current_user.password = response.body.password
                 localStorage.setItem('session_key', response.body)
+
+                $scope.form.session_key = response.body
+                
                 hideFormErrors($('form.update_password'))
             else if response.error == 3
                 showFormErrors($('form.update_password'), response.body, {
@@ -401,7 +409,7 @@ app.controller 'PhotoController', ($scope, $mdDialog, $http, $routeParams)->
                 location.href = 'index.html'
             else if response.error == 4
                 # photos not found.
-                $mainScope.alert.error('Еще не фотографии')
+                $mainScope.alert.error('Люди еще не загружали фотографии, значит приложение еще не популярное')
                 location.href = 'index.html#!/people'
             else
                 $mainScope.alert.error()
@@ -414,7 +422,7 @@ app.controller 'PhotoController', ($scope, $mdDialog, $http, $routeParams)->
             response = response.data
             if response.error == 0
                 $scope.form.text = ''
-                $mainScope.alert.success('Успешно написано!')
+                $mainScope.alert.success('Успешно отправлено!')
             else if response.error == 3
                 try
                     response.body['text']['min']

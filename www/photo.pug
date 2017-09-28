@@ -24,7 +24,7 @@ div(ng-controller='PhotoController' layout='column' ng-cloak)
                         i.fa.fa-thumbs-up
                     md-button(md-colors='{backgroundColor: "green"}' ng-show='like == 1')
                         i.fa.fa-thumbs-up
-                // md-divider
+                md-divider
                 form(onsummit='return false' autocomplete='off' ng-submit='write_comment()')
                     .comment(layout='row' ng-show='bgColor == "blue"')
                         md-input-container.md-block.no-error
