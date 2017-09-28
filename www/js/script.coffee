@@ -1,4 +1,4 @@
-api_url = 'http://localhost:3000/api/v1/'
+api_url = 'http://178.57.222.100:3000/api/v1/'
 systemLanguage = navigator.language.substr(0,2)
 
 showFormErrors = (formElement, server_errors, errors_normalizer)->
@@ -24,31 +24,31 @@ app.config ($mdThemingProvider)->
 app.config ($routeProvider)->
     $routeProvider
     .when '/', {
-        templateUrl: '/start.html',
+        templateUrl: 'start.html',
     }
     .when '/login', {
-        templateUrl: '/login.html',
+        templateUrl: 'login.html',
     }
     .when '/join', {
-        templateUrl: '/join.html',
+        templateUrl: 'join.html',
     }
     .when '/recovery', {
-        templateUrl: '/recovery.html',
+        templateUrl: 'recovery.html',
     }
     .when '/people', {
-        templateUrl: '/people.html',
+        templateUrl: 'people.html',
     }
     .when '/settings', {
-        templateUrl: '/settings.html',
+        templateUrl: 'settings.html',
     }
     .when '/about', {
-        templateUrl: '/about.html',
+        templateUrl: 'about.html',
     }
     .when '/photo', {
-        templateUrl: '/photo.html',
+        templateUrl: 'photo.html',
     }
     .when '/my_photos', {
-        templateUrl: '/my_photos.html',
+        templateUrl: 'my_photos.html',
     }
 
 $mainScope = null
@@ -97,7 +97,7 @@ app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http
             response = response.data
             if response.error == 0
                 localStorage.setItem('session_key', null)
-                location.href = '/'
+                location.href = 'index.html'
             else
                 $scope.alert.error()
             return null
@@ -108,11 +108,11 @@ app.controller 'MainController', ($scope, $timeout, $mdSidenav, $mdDialog, $http
     $scope.getCurrentUser((response)->
         if response != null
             # Is auth.
-            location.href = '/#!/people'
+            location.href = 'index.html#!/people'
             $scope.current_user = response
         else
             # Is not auth.
-            location.href = '/#!/login'
+            location.href = 'index.html#!/login'
     )
     
     $mainScope = $scope
@@ -129,7 +129,7 @@ app.controller 'LoginController', ($scope, $mdDialog, $http)->
                 $mainScope.alert.error('Неверные данные!')
             else if response.error == 0
                 localStorage.setItem('session_key', response.body)
-                location.href = '/'
+                location.href = 'index.html'
             else
                 $mainScope.alert.error
         , ->
@@ -173,7 +173,7 @@ app.controller 'JoinController', ($scope, $mdDialog, $http)->
                     response = response.data
                     if response.error == 0
                         localStorage.setItem('session_key', response.body)
-                        location.href = '/'
+                        location.href = 'index.html'
                     else
                         $mainScope.alert.error
                 , ->
@@ -228,7 +228,7 @@ app.controller 'MyPhotosController', ($scope, $mdDialog, $http, FileUploader)->
             if response.error == 0
                 $scope.photos = response.body
             else if response.error == 2
-                location.href = '/'
+                location.href = 'index.html'
             else
                 $mainScope.alert.error()
                 
@@ -398,11 +398,11 @@ app.controller 'PhotoController', ($scope, $mdDialog, $http, $routeParams)->
                     , $mainScope.alert.error)
 
             else if response.error == 2
-                location.href = '/'
+                location.href = 'index.html'
             else if response.error == 4
                 # photos not found.
                 $mainScope.alert.error('Еще не фотографии')
-                location.href = '/#!/people'
+                location.href = 'index.html#!/people'
             else
                 $mainScope.alert.error()
                 
